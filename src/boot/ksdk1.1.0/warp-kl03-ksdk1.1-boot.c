@@ -1603,7 +1603,7 @@ main(void)
 #endif
 				OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 				
-#ifdef WARP_BUILD_ENABLE_DEVMMA8451Q
+#ifdef WARP_BUILD_ENABLE_DEVINA219
 					SEGGER_RTT_WriteString(0, "\r\t- 'l' INA219			(0x00--0x31): 1.95V -- 3.6V\n");
 					#else
 					SEGGER_RTT_WriteString(0, "\r\t- 'l' INA219			(0x00--0x31): 1.95V -- 3.6V (compiled out) \n");
@@ -1761,6 +1761,15 @@ main(void)
 						break;
 					}
 #endif
+#ifdef WARP_BUILD_ENABLE_DEVINA219
+						case 'l':
+						{
+							menuTargetSensor = kWarpSensorINA219;
+							menuI2cDevice = &deviceINA219State;
+							break;
+						}
+	#endif
+
 					default:
 					{
 #ifdef WARP_BUILD_ENABLE_SEGGER_RTT_PRINTF
