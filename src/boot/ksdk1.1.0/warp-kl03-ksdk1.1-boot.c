@@ -1602,6 +1602,13 @@ main(void)
 				SEGGER_RTT_WriteString(0, "\r\t- 'k' AS7263			(0x00--0x2B): 2.7V -- 3.6V (compiled out) \n");
 #endif
 				OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+				
+#ifdef WARP_BUILD_ENABLE_DEVMMA8451Q
+					SEGGER_RTT_WriteString(0, "\r\t- 'l' INA219			(0x00--0x31): 1.95V -- 3.6V\n");
+					#else
+					SEGGER_RTT_WriteString(0, "\r\t- 'l' INA219			(0x00--0x31): 1.95V -- 3.6V (compiled out) \n");
+	#endif
+					OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 				SEGGER_RTT_WriteString(0, "\r\tEnter selection> ");
 				OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
