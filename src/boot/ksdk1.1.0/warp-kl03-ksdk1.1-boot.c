@@ -63,6 +63,8 @@
 *	Comment out the header file to disable devices
 */
 #ifndef WARP_FRDMKL03
+
+#	include "devINA219.h"
 #	include "devBMX055.h"
 #	include "devMMA8451Q.h"
 #	include "devSSD1331.h"
