@@ -123,6 +123,10 @@ volatile WarpI2CDeviceState			deviceBMX055magState;
 volatile WarpI2CDeviceState			deviceMMA8451QState;
 #endif
 
+#ifdef WARP_BUILD_ENABLE_DEVINA219
+	volatile WarpI2CDeviceState		deviceINA219State;
+	#endif
+
 #ifdef WARP_BUILD_ENABLE_DEVLPS25H
 volatile WarpI2CDeviceState			deviceLPS25HState;
 #endif
