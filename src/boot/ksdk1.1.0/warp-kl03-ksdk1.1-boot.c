@@ -1604,9 +1604,9 @@ main(void)
 				OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 				
 #ifdef WARP_BUILD_ENABLE_DEVINA219
-					SEGGER_RTT_WriteString(0, "\r\t- 'l' INA219			(0x00--0x31): 1.95V -- 3.6V\n");
+					SEGGER_RTT_WriteString(0, "\r\t- 'l' INA219			(0x00--0x4F): 3.00V -- 5.5V\n");
 					#else
-					SEGGER_RTT_WriteString(0, "\r\t- 'l' INA219			(0x00--0x31): 1.95V -- 3.6V (compiled out) \n");
+					SEGGER_RTT_WriteString(0, "\r\t- 'l' INA219			(0x00--0x4F): 3.00V -- 5.5V (compiled out) \n");
 	#endif
 					OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
