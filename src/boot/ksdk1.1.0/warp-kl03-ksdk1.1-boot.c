@@ -2972,6 +2972,35 @@ repeatRegisterReadForDeviceAndAddress(WarpSensorDevice warpSensorDevice, uint8_t
 			break;
 		}
 
+		case kWarpSensorINA219:
+		{
+				/*
+				 *	!!!INA219: VDD 1.95--3.6
+				 */
+#ifdef WARP_BUILD_ENABLE_DEVMMA8451Q
+			loopForSensor(	"\r\nINA219:\n\r",		/*	tagString			*/
+					&readSensorRegisterINA219,	/*	readSensorRegisterFunction	*/
+					&deviceINA219State,		/*	i2cDeviceState			*/
+					NULL,				/*	spiDeviceState			*/
+					baseAddress,			/*	baseAddress			*/
+					0x40,				/*	minAddress			*/
+					0x4F,				/*	maxAddress			*/
+					repetitionsPerAddress,		/*	repetitionsPerAddress		*/
+					chunkReadsPerAddress,		/*	chunkReadsPerAddress		*/
+					spinDelay,			/*	spinDelay			*/
+					autoIncrement,			/*	autoIncrement			*/
+					sssupplyMillivolts,		/*	sssupplyMillivolts		*/
+					referenceByte,			/*	referenceByte			*/
+					adaptiveSssupplyMaxMillivolts,	/*	adaptiveSssupplyMaxMillivolts	*/
+					chatty				/*	chatty				*/
+					);
+			#else
+			SEGGER_RTT_WriteString(0, "\r\n\tINA219 Read Aborted. Device Disabled :(");
+#endif
+			break;
+		}
+
+
 		case kWarpSensorBME680:
 		{
 			/*
