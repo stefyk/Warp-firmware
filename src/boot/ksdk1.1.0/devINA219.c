@@ -216,7 +216,7 @@ printSensorDataINA219(void)
 	readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
 	readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 6) | (readSensorRegisterValueLSB >> 2);
  
- 
+ 	*/
  
 	/*
 	 *	Sign extend the 14-bit value based on knowledge that upper 2 bit are 0:
