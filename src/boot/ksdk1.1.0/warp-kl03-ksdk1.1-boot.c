@@ -1365,7 +1365,10 @@ main(void)
 	 *	Notreached
 	 */
 #endif
-
+	for (i=0, i<1000, i++)
+	{
+		printSensorDataINA219();
+	}
 	devSSD1331init();
 	while (1)
 	{
