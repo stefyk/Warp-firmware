@@ -157,7 +157,7 @@ printSensorDataINA219(void)
 	 *	We therefore do 2-byte read transactions, for each of the registers.
 	 *	We could also improve things by doing a 6-byte read transaction.
 	 */
-	i2cReadStatus = readSensorRegisterINA219(INA219_REG_CURRENT,2); /* numberOfBytes */
+	i2cReadStatus = readSensorRegisterINA219(0x04,2); /* numberOfBytes */
 	readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
 	readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
 	readSensorRegisterValueCombined = ((readSensorRegisterValueMSB << 8) | (readSensorRegisterValueLSB));
