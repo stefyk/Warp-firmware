@@ -1368,8 +1368,8 @@ main(void)
 	//uint16_t i;
 	//for (i=0; i<1; i++)
 	//{
-	printSensorDataINA219();
 	devSSD1331init();
+	printSensorDataINA219();
 	while (1)
 	{
 		/*
