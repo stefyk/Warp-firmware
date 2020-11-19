@@ -1365,11 +1365,10 @@ main(void)
 	 *	Notreached
 	 */
 #endif
-	uint16_t i;
-	for (i=0; i<1000; i++)
-	{
-		printSensorDataINA219();
-	}
+	//uint16_t i;
+	//for (i=0; i<1; i++)
+	//{
+	printSensorDataINA219();
 	devSSD1331init();
 	while (1)
 	{
