@@ -81,7 +81,7 @@ devSSD1331init(void)
 	 */
 	PORT_HAL_SetMuxMode(PORTB_BASE, 13u, kPortMuxAsGpio);
 	PORT_HAL_SetMuxMode(PORTA_BASE, 12u, kPortMuxAsGpio);
-	PORT_HAL_SetMuxMode(PORTB_BASE, 0u, kPortMuxAsGpio);
+	PORT_HAL_SetMuxMode(PORTB_BASE, 2u, kPortMuxAsGpio);
 
 
 	/*
