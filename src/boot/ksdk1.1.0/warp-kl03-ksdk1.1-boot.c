@@ -2663,7 +2663,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag, int menuDelay
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		#endif
 		#ifdef WARP_BUILD_ENABLE_DEVINA219
-		SEGGER_RTT_WriteString(0, " INA219 busvoltage, INA219 shuntvoltage, INA219 Loadvoltage, INA219 current_mA,")
+		SEGGER_RTT_WriteString(0, " INA219 busvoltage, INA219 shuntvoltage, INA219 Loadvoltage, INA219 current_mA,");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		#endif
 		#ifdef WARP_BUILD_ENABLE_DEVMAG3110
