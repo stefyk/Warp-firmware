@@ -28,4 +28,4 @@ WarpStatus	readSensorSignalINA219(WarpTypeMask signal,
 					WarpSignalAccuracy accuracy,
 					WarpSignalReliability reliability,
 					WarpSignalNoise noise);
-void		printSensorDataINA219(bool hexModeFlag);
+void		printSensorDataINA219(void);
