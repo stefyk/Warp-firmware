@@ -2184,7 +2184,7 @@ main(void)
 				break;
 			}
 				
-		#ifdef WARP_BUILD_ENABLE_DEVINA219
+#ifdef WARP_BUILD_ENABLE_DEVINA219
 			case '+':
 				{
 					/*
