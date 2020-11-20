@@ -124,7 +124,7 @@ WarpStatus calibrateSensor_16v_400mA(int16_t pullupValue)
 }
 
 float
-getCurrent_mA( uint16_t pullupValue)
+getCurrent_mA(pullupValue)
 {
     readSensorRegisterINA219(INA219_REG_CURRENT, 2);
 	uint8_t msb = deviceINA219State.i2cBuffer[0];
