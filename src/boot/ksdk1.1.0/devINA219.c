@@ -128,9 +128,11 @@ readSensorRegisterINA219(uint8_t deviceRegister, int numberOfBytes)
 		SEGGER_RTT_printf(0, "read in read function failed 0x%02x \n", status);
 		return kWarpStatusDeviceCommunicationFailed;
 	}
-	
+	else
+	{
 	SEGGER_RTT_WriteString(0, "read success\n");
 	return kWarpStatusOK;
+	}
 }
 
 
