@@ -30,11 +30,13 @@ initINA219(const uint8_t i2cAddress, WarpI2CDeviceState volatile *  deviceStateP
 }
 
 WarpStatus
-writeSensorRegisterINA219(uint8_t deviceRegister, uint16_t value)
+writeSensorRegisterINA219(uint8_t deviceRegister, uint16_t payload,uint16_t menuI2cPullupValue )
 {
-	uint8_t payloadMSB;
-	uint8_t payloadLSB;
-	uint8_t		payloadByte[2], commandByte[1];
+	uint8_t readSensorRegisterValueMSB = payloadMSB >> 8;
+	uint8_t readSensorRegisterValueLSB = payloadLSB & 0xFF;
+	uint8_t payloadBytes[2] = {readSensorRegisterValueMSB, readSensorRegisterValueLSB};
+	uint8_t commandByte[1] = {0xFF};
+	
 	i2c_status_t	status;
 
 	switch (deviceRegister)
@@ -57,9 +59,6 @@ writeSensorRegisterINA219(uint8_t deviceRegister, uint16_t value)
 		.baudRate_kbps = gWarpI2cBaudRateKbps
 	};
 
-	commandByte[0] = deviceRegister;
-	payloadByte[0] = payloadMSB;
-	payloadByte[1] = payloadLSB;
 	status = I2C_DRV_MasterSendDataBlocking(
 							0 /* I2C instance */,
 							&slave,
