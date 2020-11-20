@@ -2183,7 +2183,59 @@ main(void)
 
 				break;
 			}
-
+				
+		#ifdef WARP_BUILD_ENABLE_DEVINA219
+			case '+':
+				{
+					/*
+					 * I2C INA219 intitialization
+					 */
+					 
+					
+					WarpStatus i2cWriteStatusA, i2cWriteStatusB, i2cReadStatusCurrent;
+					uint8_t readSensorRegisterValueMSB;
+					uint8_t readSensorRegisterValueLSB;
+					uint16_t readSensorRegisterValueCombined;
+					
+					enableI2Cpins(menuI2cPullupValue);
+					i2cWriteStatusA = writeSensorRegisterINA219(0x00 /* register address */,
+											0x399F /* payload: standard config, described in data sheet*/ );
+					i2cWriteStatusB = writeSensorRegisterINA219(0x05 /* register address */,
+											0x1000 /* payload: calibration */);
+					
+					SEGGER_RTT_printf(0, "\nWriting to I2C device");
+					if((i2cWriteStatusA != kWarpStatusOK) || (i2cWriteStatusB != kWarpStatusOK))
+					{
+						SEGGER_RTT_printf(0, "\nError when writing to I2C device");
+					}
+					
+					for (int i=1; i<1000; i++)
+					{
+						i2cReadStatusCurrent = readSensorRegisterValueINA219(0x04, 2);
+						if (i2cReadStatusCurrent == kWarpStatusOK)
+						{
+							SEGGER_RTT_printf(0, "\nReading from current: 0x%02x 0x%02x", deviceINA219State.i2cBuffer[0], deviceINA219State.i2cBuffer[1]);
+							readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
+							readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
+							SEGGER_RTT_printf(0, "\nRaw reading from MSB: %d", deviceINA219State.i2cBuffer[0]);
+							SEGGER_RTT_printf(0, "\nRaw reading from LSB: %d", deviceINA219State.i2cBuffer[1]);
+							readSensorRegisterValueCombined = ((readSensorRegisterValueMSB << 8) | (readSensorRegisterValueLSB));
+							SEGGER_RTT_printf(0, "\nRaw reading from current: %d", readSensorRegisterValueCombined);
+							int ina219_currentDivider_mA = 10;
+							readSensorRegisterValueCombined /= ina219_currentDivider_mA;
+							SEGGER_RTT_printf(0, "\nReading from current: %d", readSensorRegisterValueCombined);
+							OSA_TimeDelay(100);
+						}
+						if ((i2cReadStatusCurrent != kWarpStatusOK))
+						{
+							SEGGER_RTT_printf(0, "\nError when reading from I2C device");
+						}
+					}
+					disableI2Cpins();
+					break;
+				}
+#endif
+							
 
 			/*
 			 *	Ignore naked returns.
