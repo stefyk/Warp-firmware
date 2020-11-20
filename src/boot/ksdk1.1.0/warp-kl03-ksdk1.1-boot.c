@@ -2209,7 +2209,7 @@ main(void)
 					
 					for (int i=1; i<1000; i++)
 					{
-						i2cReadStatusCurrent = readSensorRegisterINA219(0x04, 2);
+						i2cReadStatusCurrent = readSensorRegisterINA219(0x05, 2);
 						if (i2cReadStatusCurrent == kWarpStatusOK)
 						{
 							SEGGER_RTT_printf(0, "\nReading from current: 0x%02x 0x%02x", deviceINA219State.i2cBuffer[0], deviceINA219State.i2cBuffer[1]);
