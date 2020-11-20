@@ -19,7 +19,7 @@ void		initINA219(const uint8_t i2cAddress, WarpI2CDeviceState volatile *  device
 WarpStatus	readSensorRegisterINA219(uint8_t deviceRegister, int numberOfBytes);
 
 WarpStatus
-writeSensorRegisterINA219(uint8_t deviceRegister, uint8_t payloadMSB, uint8_t payloadLSB, uint16_t menuI2cPullupValue);
+writeSensorRegisterINA219(uint8_t deviceRegister, uint16_t value);
 WarpStatus	configureSensorINA219(uint8_t payloadF_SETUP, uint8_t payloadCTRL_REG1, uint16_t menuI2cPullupValue);
 //WarpStatus	readSensorSignalINA219(WarpTypeMask signal,
 //					WarpSignalPrecision precision,
