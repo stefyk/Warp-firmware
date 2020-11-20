@@ -1,0 +1,96 @@
+
+#ifndef WARP_BUILD_ENABLE_DEVINA219
+#define WARP_BUILD_ENABLE_DEVINA219
+#endif
+
+/** Configuration values **/
+typedef enum
+{
+    INA219_CONFIG_RESET_ON = 0x8000,
+    INA219_CONFIG_RESET_OFF = 0x0000
+} INA219ConfigReset;
+
+typedef enum
+{
+    INA219_CONFIG_BVOLTAGE_RNG_16V = 0x0000,
+    INA219_CONFIG_BVOLTAGE_RNG_32V = 0x2000
+} INA219ConfigBusVoltageRange;
+
+typedef enum
+{
+    INA219_CONFIG_PGA_GAIN_1_40 = 0x0000,
+    INA219_CONFIG_PGA_GAIN_2_80 = 0x0800,
+    INA219_CONFIG_PGA_GAIN_4_160 = 0x1000,
+    INA219_CONFIG_PGA_GAIN_8_320 = 0x1800
+} INA219ConfigPGAGain;
+
+
+typedef enum
+{
+    INA219_CONFIG_BADC_9_BIT = 0x0000,
+    INA219_CONFIG_BADC_10_BIT = 0x0080,
+    INA219_CONFIG_BADC_11_BIT = 0x0100,
+    INA219_CONFIG_BADC_12_BIT = 0x0180,
+    INA219_CONFIG_BADC_12_BIT_2_AVG = 0x0480,
+    INA219_CONFIG_BADC_12_BIT_4_AVG = 0x0500,
+    INA219_CONFIG_BADC_12_BIT_8_AVG = 0x0580,
+    INA219_CONFIG_BADC_12_BIT_16_AVG = 0x0600,
+    INA219_CONFIG_BADC_12_BIT_32_AVG = 0x0680,
+    INA219_CONFIG_BADC_12_BIT_64_AVG = 0x0700,
+    INA219_CONFIG_BADC_12_BIT_128_AVG = 0x0780
+} INA219ConfigBADC;
+
+typedef enum
+{
+    INA219_CONFIG_SADC_9_BIT = 0x0000,
+    INA219_CONFIG_SADC_10_BIT = 0x0008,
+    INA219_CONFIG_SADC_11_BIT = 0x0010,
+    INA219_CONFIG_SADC_12_BIT = 0x0018,
+    INA219_CONFIG_SADC_12_BIT_2_AVG = 0x0048,
+    INA219_CONFIG_SADC_12_BIT_4_AVG = 0x0050,
+    INA219_CONFIG_SADC_12_BIT_8_AVG = 0x0058,
+    INA219_CONFIG_SADC_12_BIT_16_AVG = 0x0060,
+    INA219_CONFIG_SADC_12_BIT_32_AVG = 0x0068,
+    INA219_CONFIG_SADC_12_BIT_64_AVG = 0x0070,
+    INA219_CONFIG_SADC_12_BIT_128_AVG = 0x0078
+} INA219ConfigSADC;
+
+typedef enum
+{
+    INA219_CONFIG_MODE_POWER_DOWN = 0x0000,
+    INA219_CONFIG_MODE_SHUNT_VOLTAGE_TRIGGERED = 0x0001,
+    INA219_CONFIG_MODE_BUS_VOLTAGE_TRIGGERED = 0x0002,
+    INA219_CONFIG_MODE_BUS_AND_SHUNT_VOLTAGE_TRIGGERED = 0x0003,
+    INA219_CONFIG_MODE_ADC_OFF = 0x0004,
+    INA219_CONFIG_MODE_SHUNT_VOLTAGE_CONTINUOUS = 0x0005,
+    INA219_CONFIG_MODE_BUS_VOLTAGE_CONTINUOUS = 0x0006,
+    INA219_CONFIG_MODE_BUS_AND_SHUNT_VOLTAGE_CONTINUOUS = 0x0007
+} INA219ConfigMode;
+
+#define INA219_DEFAULT_CONFIG (0x399F)
+
+/** configuration **/
+#define INA219_REG_CONFIG (0x00)
+
+/** shunt voltage register **/
+#define INA219_REG_SHUNTVOLTAGE (0x01)
+
+/** bus voltage register **/
+#define INA219_REG_BUSVOLTAGE (0x02)
+
+/** power register **/
+#define INA219_REG_POWER (0x03)
+
+/** current register **/
+#define INA219_REG_CURRENT (0x04)
+
+/** calibration register **/
+#define INA219_REG_CALIBRATION (0x05)
+
+void		initINA219(const uint8_t i2cAddress, WarpI2CDeviceState volatile *  deviceStatePointer);
+WarpStatus writeSensorRegisterINA219(uint8_t deviceRegister, uint8_t payload_msb, uint8_t payload_lsb, uint16_t menuI2cPullupValue);
+WarpStatus readSensorRegisterINA219(uint8_t deviceRegister, int numberOfBytes);
+WarpStatus resetINA219(uint16_t pullupValue);
+float getCurrent_mA( uint16_t pullupValue);
+WarpStatus calibrateSensor_32v_1A(int16_t pullupValue);
+WarpStatus setConfig(uint16_t config, uint16_t pullupValue);
