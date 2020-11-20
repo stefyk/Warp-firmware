@@ -1369,7 +1369,7 @@ main(void)
 	//for (i=0; i<1; i++)
 	//{
 	devSSD1331init();
-	printSensorDataINA219();
+	getCurrent_mA( uint16_t pullupValue);
 	while (1)
 	{
 		/*
