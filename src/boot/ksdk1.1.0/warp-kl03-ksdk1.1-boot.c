@@ -2212,7 +2212,7 @@ main(void)
 						i2cReadStatusCurrent = readSensorRegisterINA219(0x04, 2);
 						if (i2cReadStatusCurrent == kWarpStatusOK)
 						{
-							SEGGER_RTT_printf(0, "\nReading from current: 0x%02x 0x%02x", deviceINA219State.i2cBuffer[0], deviceINA219State.i2cBuffer[1]);
+							//SEGGER_RTT_printf(0, "\nReading from current: 0x%02x 0x%02x", deviceINA219State.i2cBuffer[0], deviceINA219State.i2cBuffer[1]);
 							readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
 							readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
 							//SEGGER_RTT_printf(0, "\nRaw reading from MSB: %d", deviceINA219State.i2cBuffer[0]);
