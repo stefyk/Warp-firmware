@@ -1242,7 +1242,7 @@ main(void)
 #endif
 
 #ifdef WARP_BUILD_ENABLE_DEVINA219
-	initINA219(	0x1D	/* i2cAddress */,	&deviceINA219State	);
+	initINA219(	0x40	/* i2cAddress */,	&deviceINA219State	);
 #endif
 
 #ifdef WARP_BUILD_ENABLE_DEVLPS25H
