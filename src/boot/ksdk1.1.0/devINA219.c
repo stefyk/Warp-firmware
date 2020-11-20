@@ -32,6 +32,8 @@ initINA219(const uint8_t i2cAddress, WarpI2CDeviceState volatile *  deviceStateP
 WarpStatus
 writeSensorRegisterINA219(uint8_t deviceRegister, uint16_t value)
 {
+	uint8_t payloadMSB;
+	uint8_t payloadLSB;
 	uint8_t		payloadByte[2], commandByte[1];
 	i2c_status_t	status;
 
