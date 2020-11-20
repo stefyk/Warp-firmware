@@ -1369,6 +1369,8 @@ main(void)
 	//for (i=0; i<1; i++)
 	//{
 	devSSD1331init();
+	WarpStatus resetINA219(pullupValue);
+	WarpStatus writeSensorRegisterINA219(uint8_t deviceRegister, uint8_t payload_msb, uint8_t payload_lsb, uint16_t menuI2cPullupValue);
 	getCurrent_mA(pullupValue);
 	while (1)
 	{
