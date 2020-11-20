@@ -2215,13 +2215,13 @@ main(void)
 							SEGGER_RTT_printf(0, "\nReading from current: 0x%02x 0x%02x", deviceINA219State.i2cBuffer[0], deviceINA219State.i2cBuffer[1]);
 							readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
 							readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
-							SEGGER_RTT_printf(0, "\nRaw reading from MSB: %d", deviceINA219State.i2cBuffer[0]);
-							SEGGER_RTT_printf(0, "\nRaw reading from LSB: %d", deviceINA219State.i2cBuffer[1]);
+							//SEGGER_RTT_printf(0, "\nRaw reading from MSB: %d", deviceINA219State.i2cBuffer[0]);
+							//SEGGER_RTT_printf(0, "\nRaw reading from LSB: %d", deviceINA219State.i2cBuffer[1]);
 							readSensorRegisterValueCombined = ((readSensorRegisterValueMSB << 8) | (readSensorRegisterValueLSB));
-							SEGGER_RTT_printf(0, "\nRaw reading from current: %d", readSensorRegisterValueCombined);
+							//SEGGER_RTT_printf(0, "\nRaw reading from current: %d", readSensorRegisterValueCombined);
 							int ina219_currentDivider_mA = 10;
 							readSensorRegisterValueCombined /= ina219_currentDivider_mA;
-							SEGGER_RTT_printf(0, "\nReading from current: %d", readSensorRegisterValueCombined);
+							SEGGER_RTT_printf(0, "\n %d", readSensorRegisterValueCombined);
 							OSA_TimeDelay(100);
 						}
 						if ((i2cReadStatusCurrent != kWarpStatusOK))
