@@ -1369,7 +1369,7 @@ main(void)
 	//for (i=0; i<1; i++)
 	//{
 	devSSD1331init();
-	getCurrent_mA( uint16_t pullupValue);
+	getCurrent_mA(pullupValue);
 	while (1)
 	{
 		/*
