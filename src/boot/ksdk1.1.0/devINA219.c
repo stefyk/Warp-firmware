@@ -42,7 +42,7 @@ WarpStatus resetINA219(uint16_t pullupValue)
 	return setConfig((uint16_t)INA219_DEFAULT_CONFIG, pullupValue);
 }
 
-WarpStatus setConfig(uint16_t config, uint16_t pullupValue)
+WarpStatus configureSensorINA219(uint16_t config, uint16_t pullupValue)
 {
 	uint8_t bytes [sizeof(uint16_t)] =
 	{
@@ -88,7 +88,7 @@ WarpStatus calibrateSensor_32v_1A(int16_t pullupValue)
 	return calibStatus | configStatus;		
 }
 
-WarpStatus calibrateSensor_16v_400mA(int16_t pullupValue)
+WarpStatus calibrateSensor_16v_400mV(int16_t pullupValue)
 {
 	//Cal value
 	ina219Calibration = 8192;
@@ -124,7 +124,7 @@ WarpStatus calibrateSensor_16v_400mA(int16_t pullupValue)
 }
 
 float
-getCurrent_mA( uint16_t pullupValue)
+printSensorDataINA219( uint16_t pullupValue)
 {
     readSensorRegisterINA219(INA219_REG_CURRENT, 2);
 	uint8_t msb = deviceINA219State.i2cBuffer[0];
