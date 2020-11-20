@@ -123,12 +123,14 @@ readSensorRegisterINA219(uint8_t deviceRegister, int numberOfBytes)
 
 	if (status != kStatus_I2C_Success)
 	{
-		SEGGER_RTT_printf(0, "read failed 0x%02x \n", status);
+		SEGGER_RTT_printf(0, "read in read function failed 0x%02x \n", status);
 		return kWarpStatusDeviceCommunicationFailed;
 	}
 	
-	SEGGER_RTT_WriteString(0, "read successesful\n");
-	
+	else
+	{
+	SEGGER_RTT_WriteString(0, "read in read function successesful\n");
+	}
 
 	return kWarpStatusOK;
 }
@@ -186,7 +188,7 @@ printSensorDataINA219(hexModeFlag)
 	
 	else
 	{
-		SEGGER_RTT_printf(0, "Error reading current,");
+		SEGGER_RTT_printf(0, "Error reading current in print function,");
 	}
 }
 
