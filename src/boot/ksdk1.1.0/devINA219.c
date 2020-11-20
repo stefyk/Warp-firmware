@@ -108,9 +108,6 @@ readSensorRegisterINA219(uint8_t deviceRegister, int numberOfBytes)
 		.address = deviceINA219State.i2cAddress,
 		.baudRate_kbps = gWarpI2cBaudRateKbps
 	};
-
-	SEGGER_RTT_printf(0, " 0x%02x,", slave.address);
-    	SEGGER_RTT_printf(0, " %d\n", slave.baudRate_kbps);
 	
 	cmdBuf[0] = deviceRegister;
 
@@ -170,12 +167,14 @@ printSensorDataINA219(hexModeFlag)
 	Rawcurrent = readSensorRegisterValueCombined;
 			
 	SEGGER_RTT_WriteString(0, "Read in print function successful\n");
-			
+	SEGGER_RTT_printf(0, "MSB 0x%02x 0x%02x,", readSensorRegisterValueMSB, readSensorRegisterValueLSB);
+	SEGGER_RTT_printf(0, "Raw current reading: %d",readSensorRegisterValueCombined);
+	
 	if (i2cReadStatus == kWarpStatusOK)
 	
 	{
 
-			SEGGER_RTT_printf(0, "MSB: 0x%02x LSB: 0x%02x,", readSensorRegisterValueMSB, readSensorRegisterValueLSB);
+			SEGGER_RTT_printf(0, "MSB 0x%02x 0x%02x,", readSensorRegisterValueMSB, readSensorRegisterValueLSB);
 			SEGGER_RTT_printf(0, "Raw current reading: %d",readSensorRegisterValueCombined);
 			
 	
