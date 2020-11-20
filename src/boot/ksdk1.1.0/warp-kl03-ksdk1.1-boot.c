@@ -2321,11 +2321,12 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag, int menuDelay
 		SEGGER_RTT_WriteString(0, " AMG8834 Temp,");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		#endif
-
+		/*
 		#ifdef WARP_BUILD_ENABLE_DEVINA219
-		SEGGER_RTT_WriteString(0, " MMA8451 x, MMA8451 y, MMA8451 z,");
+		SEGGER_RTT_WriteString(0, " M");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		#endif
+		*/
 		#ifdef WARP_BUILD_ENABLE_DEVMAG3110
 		SEGGER_RTT_WriteString(0, " MAG3110 x, MAG3110 y, MAG3110 z, MAG3110 Temp,");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
@@ -2609,33 +2610,34 @@ repeatRegisterReadForDeviceAndAddress(WarpSensorDevice warpSensorDevice, uint8_t
 		case kWarpSensorINA219:
 		{
 			/*
-			 *	INA219: VDD 1.95--3.6
-			 */
-#ifdef WARP_BUILD_ENABLE_DEVINA219
-			loopForSensor(	"\r\nINA219:\n\r",		/*	tagString			*/
-					&readSensorRegisterINA219,	/*	readSensorRegisterFunction	*/
-					&deviceINA219State,		/*	i2cDeviceState			*/
-					NULL,				/*	spiDeviceState			*/
-					baseAddress,			/*	baseAddress			*/
-					0x00,				/*	minAddress			*/
-					0x31,				/*	maxAddress			*/
-					repetitionsPerAddress,		/*	repetitionsPerAddress		*/
-					chunkReadsPerAddress,		/*	chunkReadsPerAddress		*/
-					spinDelay,			/*	spinDelay			*/
-					autoIncrement,			/*	autoIncrement			*/
-					sssupplyMillivolts,		/*	sssupplyMillivolts		*/
-					referenceByte,			/*	referenceByte			*/
-					adaptiveSssupplyMaxMillivolts,	/*	adaptiveSssupplyMaxMillivolts	*/
-					chatty				/*	chatty				*/
-					);
-			#else
-			SEGGER_RTT_WriteString(0, "\r\n\tINA219 Read Aborted. Device Disabled :(");
-#endif
-			break;
-		}
+			 *	INA219: VDD 1.95--3.6*/
+			
 
-		case kWarpSensorBME680:
-		{
+//#ifdef WARP_BUILD_ENABLE_DEVINA219
+//			loopForSensor(	"\r\nINA219:\n\r",		/*	tagString			*/
+//					&readSensorRegisterINA219,	/*	readSensorRegisterFunction	*/
+//					&deviceINA219State,		/*	i2cDeviceState			*/
+//					NULL,				/*	spiDeviceState			*/
+//					baseAddress,			/*	baseAddress			*/
+//					0x00,				/*	minAddress			*/
+//					0x31,				/*	maxAddress			*/					repetitionsPerAddress,		/*	repetitionsPerAddress		*/
+//					chunkReadsPerAddress,		/*	chunkReadsPerAddress		*/
+//					spinDelay,			/*	spinDelay			*/
+//					autoIncrement,			/*	autoIncrement			*/
+//					sssupplyMillivolts,		/*	sssupplyMillivolts		*/
+//					referenceByte,			/*	referenceByte			*/
+//					adaptiveSssupplyMaxMillivolts,	/*	adaptiveSssupplyMaxMillivolts	*/
+//					chatty				/*	chatty				*/
+//				
+//					); 
+//			#else
+//			SEGGER_RTT_WriteString(0, "\r\n\tINA219 Read Aborted. Device Disabled :(");
+//#endif
+//			break;
+//		}
+//
+//		case kWarpSensorBME680:
+//		{ 
 			/*
 			 *	BME680: VDD 1.7--3.6
 			 */
