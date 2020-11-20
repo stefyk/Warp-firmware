@@ -91,6 +91,6 @@ void		initINA219(const uint8_t i2cAddress, WarpI2CDeviceState volatile *  device
 WarpStatus writeSensorRegisterINA219(uint8_t deviceRegister, uint8_t payload_msb, uint8_t payload_lsb, uint16_t menuI2cPullupValue);
 WarpStatus readSensorRegisterINA219(uint8_t deviceRegister, int numberOfBytes);
 WarpStatus resetINA219(pullupValue);
-float getCurrent_mA( uint16_t pullupValue);
+float getCurrent_mA(pullupValue);
 WarpStatus calibrateSensor_32v_1A(int16_t pullupValue);
 WarpStatus setConfig(uint16_t config, uint16_t pullupValue);
