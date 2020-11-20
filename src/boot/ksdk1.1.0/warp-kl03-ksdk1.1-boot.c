@@ -2712,9 +2712,9 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag, int menuDelay
 		#ifdef WARP_BUILD_ENABLE_DEVMMA8451Q
 		printSensorDataMMA8451Q(hexModeFlag);
 		#endif
-		#ifdef WARP_BUILD_ENABLE_DEVINA219
-		printSensorDataINA219();
-		#endif
+		//#ifdef WARP_BUILD_ENABLE_DEVINA219
+		//printSensorDataINA219();
+		//#endif
 		#ifdef WARP_BUILD_ENABLE_DEVMAG3110
 		printSensorDataMAG3110(hexModeFlag);
 		#endif
@@ -3544,7 +3544,7 @@ writeBytesToSpi(uint8_t *  payloadBytes, int payloadLength)
 void
 powerupAllSensors(void)
 {
-	WarpStatus	status;
+	WarpStatus status;
 
 	/*
 	 *	BMX055mag
