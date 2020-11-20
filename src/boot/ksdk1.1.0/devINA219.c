@@ -191,6 +191,5 @@ readSensorRegisterINA219(uint8_t deviceRegister, int numberOfBytes)
 //	{
 //		SEGGER_RTT_printf(0, "Error reading current in print function,");
 //	}
-}
 
   
