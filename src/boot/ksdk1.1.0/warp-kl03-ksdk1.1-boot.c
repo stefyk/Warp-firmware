@@ -2198,10 +2198,8 @@ main(void)
 					uint16_t readSensorRegisterValueCombined;
 					
 					enableI2Cpins(menuI2cPullupValue);
-					i2cWriteStatusA = writeSensorRegisterINA219(0x00 /* register address */,
-											0x399F /* payload: standard config, described in data sheet*/ );
-					i2cWriteStatusB = writeSensorRegisterINA219(0x05 /* register address */,
-											0x1000 /* payload: calibration */);
+					i2cWriteStatusA = writeSensorRegisterINA219(0x00, 0x399F);/* payload: standard config, described in data sheet*/
+					i2cWriteStatusB = writeSensorRegisterINA219(0x05,0x1000); /* payload: calibration */
 					
 					SEGGER_RTT_printf(0, "\nWriting to I2C device");
 					if((i2cWriteStatusA != kWarpStatusOK) || (i2cWriteStatusB != kWarpStatusOK))
