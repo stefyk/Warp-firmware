@@ -37,7 +37,7 @@ initINA219(const uint8_t i2cAddress, WarpI2CDeviceState volatile *  deviceStateP
 
 
 
-WarpStatus resetINA219(uint16_t pullupValue)
+WarpStatus resetINA219(pullupValue)
 {
 	return setConfig((uint16_t)INA219_DEFAULT_CONFIG, pullupValue);
 }
