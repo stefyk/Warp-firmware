@@ -491,11 +491,11 @@ disableI2Cpins(void)
 	I2C_DRV_MasterDeinit(0 /* I2C instance */);
 
 
-	/*	Warp KL03_I2C0_SCL	--> PTB3	(GPIO)			*/
-	PORT_HAL_SetMuxMode(PORTB_BASE, 3, kPortMuxAsGpio);
+	/*	Warp KL03_I2C0_SCL	--> PTB0	(GPIO)			*/
+	PORT_HAL_SetMuxMode(PORTB_BASE, 0, kPortMuxAsGpio);
 
-	/*	Warp KL03_I2C0_SDA	--> PTB4	(GPIO)			*/
-	PORT_HAL_SetMuxMode(PORTB_BASE, 4, kPortMuxAsGpio);
+	/*	Warp KL03_I2C0_SDA	--> PTB1	(GPIO)			*/
+	PORT_HAL_SetMuxMode(PORTB_BASE, 1, kPortMuxAsGpio);
 
 
 	/*
@@ -2209,7 +2209,7 @@ main(void)
 					
 					for (int i=1; i<1000; i++)
 					{
-						i2cReadStatusCurrent = readSensorRegisterINA219(0x05, 2);
+						i2cReadStatusCurrent = readSensorRegisterINA219(0x04, 2);
 						if (i2cReadStatusCurrent == kWarpStatusOK)
 						{
 							SEGGER_RTT_printf(0, "\nReading from current: 0x%02x 0x%02x", deviceINA219State.i2cBuffer[0], deviceINA219State.i2cBuffer[1]);
