@@ -86,7 +86,7 @@ readSensorRegisterINA219(uint8_t deviceRegister, int numberOfBytes)
 	uint8_t		cmdBuf[1] = {0xFF};
 	i2c_status_t	status;
 
-	SEGGER_RTT_WriteString(0, " Started reading,");
+	//SEGGER_RTT_WriteString(0, " Started reading,");
 	
 	USED(numberOfBytes);
 	switch (deviceRegister)
@@ -129,7 +129,7 @@ readSensorRegisterINA219(uint8_t deviceRegister, int numberOfBytes)
 	}
 	else
 	{
-	SEGGER_RTT_WriteString(0, "read success\n");
+	//SEGGER_RTT_WriteString(0, "read success\n");
 	return kWarpStatusOK;
 	}
 }
