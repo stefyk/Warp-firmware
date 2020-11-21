@@ -2208,8 +2208,10 @@ main(void)
 			uint8_t readSensorRegisterValueMSB;
 			uint8_t readSensorRegisterValueLSB;
 			uint16_t readSensorRegisterValueCombined; //definitions used from devINA219.c 
-			uint16_t Current;
-			int ina219_currentDivider_mA = 10.000; //Calibration value provided
+			float Current;
+			float ina219_currentDivider_mA = 10.000; //Calibration value provided
+			//
+			//
 					
 			enableI2Cpins(menuI2cPullupValue);
 			WriteStatusConfig = writeSensorRegisterINA219(0x00, 0x399F); // Write register configuration
