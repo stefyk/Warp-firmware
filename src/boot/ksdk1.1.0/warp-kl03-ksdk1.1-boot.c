@@ -2195,7 +2195,7 @@ main(void)
 #ifdef WARP_BUILD_ENABLE_DEVINA219
 			case '+':
 				{
-					printSensorDataINA219(bool hexModeFlag);
+					printSensorDataINA219(hexModeFlag);
 					/*
 					 * I2C INA219 configuration and calibration
 					 *
