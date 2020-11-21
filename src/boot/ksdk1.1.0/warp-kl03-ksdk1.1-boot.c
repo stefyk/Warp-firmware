@@ -2208,7 +2208,7 @@ main(void)
 					uint8_t readSensorRegisterValueMSB;
 					uint8_t readSensorRegisterValueLSB;
 					uint16_t readSensorRegisterValueCombined; //definitions used from devINA219.c 
-					uint16_t Current
+					uint16_t Current;
 					int ina219_currentDivider_mA = 10; //Calibration value provided
 					
 					WriteStatusConfig = writeSensorRegisterINA219(0x00, 0x400F); // Write register configuration
