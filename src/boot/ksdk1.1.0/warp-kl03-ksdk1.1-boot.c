@@ -2194,6 +2194,8 @@ main(void)
 				
 #ifdef WARP_BUILD_ENABLE_DEVINA219
 			case '+':
+				
+				bool hexModeFlag;
 				{
 					printSensorDataINA219(hexModeFlag);
 					/*
