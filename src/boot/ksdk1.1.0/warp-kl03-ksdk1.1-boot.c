@@ -2230,10 +2230,10 @@ main(void)
 						{
 						readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
 						readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
-						//SEGGER_RTT_printf(0, "\nRaw MSB value: %.3f", deviceINA219State.i2cBuffer[0]);
-						//SEGGER_RTT_printf(0, "\nRaw LSB value: %.3f", deviceINA219State.i2cBuffer[1]);
+						//SEGGER_RTT_printf(0, "\nRaw MSB value: %d", deviceINA219State.i2cBuffer[0]);
+						//SEGGER_RTT_printf(0, "\nRaw LSB value: %d", deviceINA219State.i2cBuffer[1]);
 						readSensorRegisterValueCombined = ((readSensorRegisterValueMSB << 8) | (readSensorRegisterValueLSB));
-						//SEGGER_RTT_printf(0, "\nCombined register value: %.3f", readSensorRegisterValueCombined);
+						//SEGGER_RTT_printf(0, "\nCombined register value: %d", readSensorRegisterValueCombined);
 							
 						Current = readSensorRegisterValueCombined / ina219_currentDivider_mA;
 						SEGGER_RTT_printf(0, "\n %.3f", Current);
