@@ -2196,55 +2196,57 @@ main(void)
 #ifdef WARP_BUILD_ENABLE_DEVINA219
 			case '+':
 				
-				
-				
-				{
+				{        //bool hexModeFlag=1;
+					//printSensorDataINA219(hexModeFlag);   //using devINA219.c and calling the print function from there
 					
-					
-					/*
-					 * I2C INA219 configuration and calibration
-					 *
-					 *
-					
-					WarpStatus i2cWriteStatusA, i2cWriteStatusB, i2cReadStatusCurrent;
-					uint8_t readSensorRegisterValueMSB;
-					uint8_t readSensorRegisterValueLSB;
-					uint16_t readSensorRegisterValueCombined;
 					
 					enableI2Cpins(menuI2cPullupValue);
-					i2cWriteStatusA = writeSensorRegisterINA219(0x00, 0x399F); payload: standard config, described in data sheet
-					i2cWriteStatusB = writeSensorRegisterINA219(0x05,0x1000); payload: calibration 
+					WarpStatus WriteStatusConfig;
+					WarpStatus WriteStatusCalib;
+					WarpStatus ReadStatusCurrent;
 					
-					SEGGER_RTT_printf(0, "\nWriting to I2C device");
-					if((i2cWriteStatusA != kWarpStatusOK) || (i2cWriteStatusB != kWarpStatusOK))
+					uint8_t readSensorRegisterValueMSB;
+					uint8_t readSensorRegisterValueLSB;
+					uint16_t readSensorRegisterValueCombined; //definitions used from devINA219.c 
+					uint16_t Current
+					int ina219_currentDivider_mA = 10; //Calibration value provided
+					
+					WriteStatusConfig = writeSensorRegisterINA219(0x00, 0x400F); // Write register configuration
+					WriteStatusCalib = writeSensorRegisterINA219(0x05, 0x1000); //calibration register
+					SEGGER_RTT_printf(0, "\nWriting to successful!");
+					
+					
+					if((WriteStatusConfig != kWarpStatusOK) || (WriteStatusCalib != kWarpStatusOK))
 					{
-						SEGGER_RTT_printf(0, "\nError when writing to I2C device");
+						SEGGER_RTT_printf(0, "\nError during Configuration and Calibration");
 					}
+					
+					
+					ReadStatusCurrent = readSensorRegisterINA219(0x04, 2); //Current register, 2 bits
+					if (ReadStatusCurrent == kWarpStatusOK)
+						{
 					
 					for (int i=1; i<1000; i++)
-					{
-						i2cReadStatusCurrent = readSensorRegisterINA219(0x04, 2);
-						if (i2cReadStatusCurrent == kWarpStatusOK)
-						{
-							//SEGGER_RTT_printf(0, "\nReading from current: 0x%02x 0x%02x", deviceINA219State.i2cBuffer[0], deviceINA219State.i2cBuffer[1]);
-							readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
-							readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
-							//SEGGER_RTT_printf(0, "\nRaw reading from MSB: %d", deviceINA219State.i2cBuffer[0]);
-							//SEGGER_RTT_printf(0, "\nRaw reading from LSB: %d", deviceINA219State.i2cBuffer[1]);
-							readSensorRegisterValueCombined = ((readSensorRegisterValueMSB << 8) | (readSensorRegisterValueLSB));
-							//SEGGER_RTT_printf(0, "\nRaw reading from current: %d", readSensorRegisterValueCombined);
-							int ina219_currentDivider_mA = 10;
-							readSensorRegisterValueCombined /= ina219_currentDivider_mA;
-							SEGGER_RTT_printf(0, "\n %d", readSensorRegisterValueCombined);
-							OSA_TimeDelay(100);
-						}
+							{
+						readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
+						readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
+						SEGGER_RTT_printf(0, "\nRaw MSB value: %d", deviceINA219State.i2cBuffer[0]);
+						SEGGER_RTT_printf(0, "\nRaw LSB value: %d", deviceINA219State.i2cBuffer[1]);
+						readSensorRegisterValueCombined = ((readSensorRegisterValueMSB << 8) | (readSensorRegisterValueLSB));
+						SEGGER_RTT_printf(0, "\nCombined register value: %d", readSensorRegisterValueCombined);
+							
+						Current = readSensorRegisterValueCombined / ina219_currentDivider_mA;
+						SEGGER_RTT_printf(0, "\n %d", Current);
+						OSA_TimeDelay(200);
+						
+							}
 						if ((i2cReadStatusCurrent != kWarpStatusOK))
-						{
-							SEGGER_RTT_printf(0, "\nError when reading from I2C device");
+								{
+									SEGGER_RTT_printf(0, "\nError when reading from I2C device");
+								}
 						}
-					}
 					disableI2Cpins();
-					break; */
+					break; 
 				}
 #endif
 							
