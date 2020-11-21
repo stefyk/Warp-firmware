@@ -2236,7 +2236,7 @@ main(void)
 						//SEGGER_RTT_printf(0, "\nCombined register value: %d", readSensorRegisterValueCombined);
 							
 						Current = readSensorRegisterValueCombined / ina219_currentDivider_mA;
-						SEGGER_RTT_printf(0, "\n %.3f", Current);
+						SEGGER_RTT_printf(0, "\n %d", Current);
 						OSA_TimeDelay(200);
 						}
 							if ((ReadStatusCurrent != kWarpStatusOK))
