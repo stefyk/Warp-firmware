@@ -2208,8 +2208,8 @@ main(void)
 			uint8_t readSensorRegisterValueMSB;
 			uint8_t readSensorRegisterValueLSB;
 			uint16_t readSensorRegisterValueCombined; //definitions used from devINA219.c 
-			float Current;
-			float ina219_currentDivider_mA = 10; //Calibration value provided that INA219 could measure up to 32V and 2A
+			uint16_t Current;
+			int ina219_currentDivider_mA = 10; //Calibration value provided that INA219 could measure up to 32V and 2A
 			 /*Each unit of current corresponds to 100uA --> multipliers are set 
 			 to convert raw current values Current LSB = 100uA per bit (1000/100 = 10)
 			 VBUS_MAX = 32V, VSHUNT_MAX = 0.32, RSHUNT = 0.1
