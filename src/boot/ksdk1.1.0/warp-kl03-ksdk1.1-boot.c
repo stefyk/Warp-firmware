@@ -2211,7 +2211,7 @@ main(void)
 					uint16_t Current;
 					int ina219_currentDivider_mA = 10; //Calibration value provided
 					
-					WriteStatusConfig = writeSensorRegisterINA219(0x00, 0x400F); // Write register configuration
+					WriteStatusConfig = writeSensorRegisterINA219(0x00, 0x399F); // Write register configuration
 					WriteStatusCalib = writeSensorRegisterINA219(0x05, 0x1000); //calibration register
 					SEGGER_RTT_printf(0, "\nWriting to successful!");
 					
