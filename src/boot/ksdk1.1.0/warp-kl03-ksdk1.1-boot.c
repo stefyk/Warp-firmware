@@ -1737,10 +1737,10 @@ main(void)
 					}
 #endif
 #ifdef WARP_BUILD_ENABLE_DEVAS7263
-					case 'k':
+					case '+':
 					{
-						menuTargetSensor = kWarpSensorAS7263;
-						menuI2cDevice = &deviceAS7263State;
+						menuTargetSensor = kWarpSensorINA219;
+						menuI2cDevice = &deviceINA219State;
 						break;
 					}
 #endif
