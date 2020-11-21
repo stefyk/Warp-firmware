@@ -136,60 +136,49 @@ readSensorRegisterINA219(uint8_t deviceRegister, int numberOfBytes)
 
 
 
-//void
-//printSensorDataINA219(bool hexModeFlag)
-//{
-//	uint8_t	    readSensorRegisterValueLSB;
-//	uint8_t	    readSensorRegisterValueMSB;
-//	uint16_t	readSensorRegisterValueCombined;
-//	uint16_t    Rawcurrent;
-//	uint16_t 	current;
-//	int ina219_currentDivider_uA;
+void
+printSensorDataINA219(bool hexModeFlag)
+{
+	uint8_t	    readSensorRegisterValueLSB;
+	uint8_t	    readSensorRegisterValueMSB;
+	uint16_t	readSensorRegisterValueCombined;
+	uint16_t    Rawcurrent;//	
+	uint16_t 	current;
+	int ina219_currentDivider_uA;
 	
-//	WarpStatus	i2cReadStatus;
+	WarpStatus	i2cReadStatus;
 
 
-	/*
-	 *	From the INA219 datasheet:
-	 *
-	 *		"A random read access to the LSB registers is not possible.
-	 *		Reading the MSB register and then the LSB register in sequence
-	 *		ensures that both bytes (LSB and MSB) belong to the same data
-	 *		sample, even if a new data sample arrives between reading the
-	 *		MSB and the LSB byte."
-	 *
-	 *	We therefore do 2-byte read transactions, for each of the registers.
-	 *	We could also improve things by doing a 6-byte read transaction.
-	 */
-//	i2cReadStatus = readSensorRegisterINA219(0x04,2); /* numberOfBytes */
-//	readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
-//	readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
-//	readSensorRegisterValueCombined = ((readSensorRegisterValueMSB << 8) | (readSensorRegisterValueLSB));
 	
-//	Rawcurrent = readSensorRegisterValueCombined;
+i2cReadStatus = readSensorRegisterINA219(0x04,2); /* numberOfBytes */
+readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
+readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
+readSensorRegisterValueCombined = ((readSensorRegisterValueMSB << 8) | (readSensorRegisterValueLSB));
+	
+Rawcurrent = readSensorRegisterValueCombined;
 			
-//	SEGGER_RTT_WriteString(0, "Read in print function successful\n");
-//	SEGGER_RTT_printf(0, "MSB 0x%02x 0x%02x,", readSensorRegisterValueMSB, readSensorRegisterValueLSB);
-//	SEGGER_RTT_printf(0, "Raw current reading: %d",readSensorRegisterValueCombined);
+SEGGER_RTT_WriteString(0, "Read in print function successful\n");
+SEGGER_RTT_printf(0, "MSB 0x%02x 0x%02x,", readSensorRegisterValueMSB, readSensorRegisterValueLSB);
+SEGGER_RTT_printf(0, "Raw current reading: %d",readSensorRegisterValueCombined);
 	
-//	if (i2cReadStatus == kWarpStatusOK)
+	if (i2cReadStatus == kWarpStatusOK)
 	
-//	{
+	{
 
-//			SEGGER_RTT_printf(0, "MSB 0x%02x 0x%02x,", readSensorRegisterValueMSB, readSensorRegisterValueLSB);
-//			SEGGER_RTT_printf(0, "Raw current reading: %d",readSensorRegisterValueCombined);
+			SEGGER_RTT_printf(0, "MSB 0x%02x 0x%02x,", readSensorRegisterValueMSB, readSensorRegisterValueLSB);
+			SEGGER_RTT_printf(0, "Raw current reading: %d",readSensorRegisterValueCombined);
 			
 	
 	
-//	ina219_currentDivider_uA = 100000;      // Current LSB = 10uA per bit (1000/10 = 100)
-//	current= Rawcurrent / ina219_currentDivider_uA;
-//	SEGGER_RTT_printf(0, "Current(uA): ,%d", current);
+	ina219_currentDivider_uA = 100;      // Current LSB = 10uA per bit (1000/10 = 100)	
+	current= Rawcurrent / ina219_currentDivider_uA;
+	SEGGER_RTT_printf(0, "Current(uA): ,%d", current);
 	
-//	}
+	}
 	
-//	else
-//	{
-//		SEGGER_RTT_printf(0, "Error reading current in print function,");
-//	}
+	else
+	{
+		SEGGER_RTT_printf(0, "Error reading current in print function,");
+	}
 
-  
+}
