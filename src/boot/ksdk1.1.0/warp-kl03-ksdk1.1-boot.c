@@ -2240,7 +2240,7 @@ main(void)
 						OSA_TimeDelay(200);
 						
 							}
-						if ((i2cReadStatusCurrent != kWarpStatusOK))
+						if ((ReadStatusCurrent != kWarpStatusOK))
 								{
 									SEGGER_RTT_printf(0, "\nError when reading from I2C device");
 								}
