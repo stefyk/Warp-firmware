@@ -1348,7 +1348,7 @@ main(void)
 #endif
 
 	devSSD1331init();
-	printSensorDataINA219(1);
+	//printSensorDataINA219(1);
 	while (1)
 	{
 		/*
