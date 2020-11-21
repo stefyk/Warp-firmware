@@ -2209,7 +2209,7 @@ main(void)
 			uint8_t readSensorRegisterValueLSB;
 			uint16_t readSensorRegisterValueCombined; //definitions used from devINA219.c 
 			float Current;
-			float ina219_currentDivider_mA = 10.000; //Calibration value provided
+			float ina219_currentDivider_mA = 10; //Calibration value provided
 			//
 			//
 					
@@ -2238,8 +2238,8 @@ main(void)
 						//SEGGER_RTT_printf(0, "\nCombined register value: %d", readSensorRegisterValueCombined);
 							
 						Current = readSensorRegisterValueCombined / ina219_currentDivider_mA;
-						SEGGER_RTT_printf(0, "\n Current: %d", Current);
-						OSA_TimeDelay(200);
+						SEGGER_RTT_printf(0, "\n Current: %d", readSensorRegisterValueCombined);
+						OSA_TimeDelay(500);
 						}
 							if ((ReadStatusCurrent != kWarpStatusOK))
 								{
