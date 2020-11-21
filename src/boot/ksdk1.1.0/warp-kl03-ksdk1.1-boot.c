@@ -2209,12 +2209,12 @@ main(void)
 			uint8_t readSensorRegisterValueLSB;
 			uint16_t readSensorRegisterValueCombined; //definitions used from devINA219.c 
 			uint16_t Current;
-			int ina219_currentDivider_mA = 10; //Calibration value provided
+			int ina219_currentDivider_mA = 10.000; //Calibration value provided
 					
 			enableI2Cpins(menuI2cPullupValue);
 			WriteStatusConfig = writeSensorRegisterINA219(0x00, 0x399F); // Write register configuration
 			WriteStatusCalib = writeSensorRegisterINA219(0x05, 0x1000); //calibration register
-			SEGGER_RTT_printf(0, "\nWriting to successful!");
+			//SEGGER_RTT_printf(0, "\nWriting to successful!");
 					
 					
 				if((WriteStatusConfig != kWarpStatusOK) || (WriteStatusCalib != kWarpStatusOK))
@@ -2230,13 +2230,13 @@ main(void)
 						{
 						readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
 						readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
-						SEGGER_RTT_printf(0, "\nRaw MSB value: %d", deviceINA219State.i2cBuffer[0]);
-						SEGGER_RTT_printf(0, "\nRaw LSB value: %d", deviceINA219State.i2cBuffer[1]);
+						//SEGGER_RTT_printf(0, "\nRaw MSB value: %.3f", deviceINA219State.i2cBuffer[0]);
+						//SEGGER_RTT_printf(0, "\nRaw LSB value: %.3f", deviceINA219State.i2cBuffer[1]);
 						readSensorRegisterValueCombined = ((readSensorRegisterValueMSB << 8) | (readSensorRegisterValueLSB));
-						SEGGER_RTT_printf(0, "\nCombined register value: %d", readSensorRegisterValueCombined);
+						//SEGGER_RTT_printf(0, "\nCombined register value: %.3f", readSensorRegisterValueCombined);
 							
 						Current = readSensorRegisterValueCombined / ina219_currentDivider_mA;
-						SEGGER_RTT_printf(0, "\n %d", Current);
+						SEGGER_RTT_printf(0, "\n %.3f", Current);
 						OSA_TimeDelay(200);
 						}
 							if ((ReadStatusCurrent != kWarpStatusOK))
