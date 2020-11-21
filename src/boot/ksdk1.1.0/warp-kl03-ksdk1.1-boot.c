@@ -2209,16 +2209,16 @@ main(void)
 			uint8_t readSensorRegisterValueLSB;
 			uint16_t readSensorRegisterValueCombined; //definitions used from devINA219.c 
 			float Current;
-			float ina219_currentDivider_mA = 100; //Calibration value provided that INA219 could measure up to 16V and 200mA
-			 /*Each unit of current corresponds to 10uA --> multipliers are set 
-			 to convert raw current values Current LSB = 100uA per bit (1000/10 = 100)
-			 VBUS_MAX = 16V, VSHUNT_MAX = 0.04, RSHUNT = 0.1
-			 Calibration register: Cal = trunc (0.04096 / (Current_LSB * RSHUNT)), Cal = 40960 (0xA000)
+			float ina219_currentDivider_mA = 10; //Calibration value provided that INA219 could measure up to 32V and 2A
+			 /*Each unit of current corresponds to 100uA --> multipliers are set 
+			 to convert raw current values Current LSB = 100uA per bit (1000/100 = 10)
+			 VBUS_MAX = 32V, VSHUNT_MAX = 0.32, RSHUNT = 0.1
+			 Calibration register: Cal = trunc (0.04096 / (Current_LSB * RSHUNT)), Cal = 40960 (0x1000)
 			*/		
 					
 			enableI2Cpins(menuI2cPullupValue);
 			WriteStatusConfig = writeSensorRegisterINA219(0x00, 0x399F); // Write register configuration
-			WriteStatusCalib = writeSensorRegisterINA219(0x05, 0xA000); //calibration register
+			WriteStatusCalib = writeSensorRegisterINA219(0x05, 0x1000); //calibration register
 			//SEGGER_RTT_printf(0, "\nWriting to successful!");
 					
 					
@@ -2241,7 +2241,7 @@ main(void)
 						//SEGGER_RTT_printf(0, "\nCombined register value: %d", readSensorRegisterValueCombined);
 							
 						Current = (1.0*readSensorRegisterValueCombined)/ina219_currentDivider_mA;
-						SEGGER_RTT_printf(0, "\n %d", 0.1*readSensorRegisterValueCombined);
+						SEGGER_RTT_printf(0, "\n %d", Current);
 						OSA_TimeDelay(500);
 						}
 							if ((ReadStatusCurrent != kWarpStatusOK))
