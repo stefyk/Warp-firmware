@@ -1736,6 +1736,14 @@ main(void)
 						break;
 					}
 #endif
+#ifdef WARP_BUILD_ENABLE_DEVAS7263
+					case 'k':
+					{
+						menuTargetSensor = kWarpSensorAS7263;
+						menuI2cDevice = &deviceAS7263State;
+						break;
+					}
+#endif
 					default:
 					{
 #ifdef WARP_BUILD_ENABLE_SEGGER_RTT_PRINTF
@@ -2187,10 +2195,11 @@ main(void)
 #ifdef WARP_BUILD_ENABLE_DEVINA219
 			case '+':
 				{
+					printSensorDataINA219(bool hexModeFlag)
 					/*
-					 * I2C INA219 intitialization
-					 */
-					 
+					 * I2C INA219 configuration and calibration
+					 *
+					 *
 					
 					WarpStatus i2cWriteStatusA, i2cWriteStatusB, i2cReadStatusCurrent;
 					uint8_t readSensorRegisterValueMSB;
@@ -2198,8 +2207,8 @@ main(void)
 					uint16_t readSensorRegisterValueCombined;
 					
 					enableI2Cpins(menuI2cPullupValue);
-					i2cWriteStatusA = writeSensorRegisterINA219(0x00, 0x399F);/* payload: standard config, described in data sheet*/
-					i2cWriteStatusB = writeSensorRegisterINA219(0x05,0x1000); /* payload: calibration */
+					i2cWriteStatusA = writeSensorRegisterINA219(0x00, 0x399F); payload: standard config, described in data sheet
+					i2cWriteStatusB = writeSensorRegisterINA219(0x05,0x1000); payload: calibration 
 					
 					SEGGER_RTT_printf(0, "\nWriting to I2C device");
 					if((i2cWriteStatusA != kWarpStatusOK) || (i2cWriteStatusB != kWarpStatusOK))
@@ -2230,7 +2239,7 @@ main(void)
 						}
 					}
 					disableI2Cpins();
-					break;
+					break; */
 				}
 #endif
 							
@@ -2420,9 +2429,9 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag, int menuDelay
 		#ifdef WARP_BUILD_ENABLE_DEVAMG8834
 		printSensorDataAMG8834(hexModeFlag);
 		#endif
-		//#ifdef WARP_BUILD_ENABLE_DEVINA219
-		//printSensorDataINA219(hexModeFlag);
-		//#endif
+		#ifdef WARP_BUILD_ENABLE_DEVINA219
+		printSensorDataINA219(hexModeFlag);
+		#endif
 		#ifdef WARP_BUILD_ENABLE_DEVMAG3110
 		printSensorDataMAG3110(hexModeFlag);
 		#endif
