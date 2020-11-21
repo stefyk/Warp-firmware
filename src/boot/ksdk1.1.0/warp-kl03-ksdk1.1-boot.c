@@ -2199,7 +2199,7 @@ main(void)
 				
 				{
 					
-					printSensorDataINA219(1);
+					
 					/*
 					 * I2C INA219 configuration and calibration
 					 *
