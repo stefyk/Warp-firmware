@@ -1348,6 +1348,7 @@ main(void)
 #endif
 
 	devSSD1331init();
+	printSensorDataBME680(bool hexModeFlag, uint16_t menuI2cPullupValue);
 	//printSensorDataINA219(1);
 	while (1)
 	{
