@@ -2253,8 +2253,15 @@ main(void)
 					break; 
 				}
 #endif
+				
+				
+#ifdef WARP_BUILD_ENABLE_DEVCCS811
+			case '*':
 							
-
+			{        
+					printSensorDataCCS811(bool hexModeFlag)
+			}
+#endif
 			/*
 			 *	Ignore naked returns.
 			 */
