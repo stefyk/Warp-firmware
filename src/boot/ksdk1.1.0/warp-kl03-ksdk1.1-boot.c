@@ -1348,7 +1348,8 @@ main(void)
 #endif
 
 	devSSD1331init();
-	printSensorDataBME680(bool hexModeFlag, uint16_t menuI2cPullupValue);
+	//printSensorDataBME680(bool hexModeFlag, uint16_t menuI2cPullupValue); error before bool; either get rid of arguments
+	// or define the function in the case "*" section
 	//printSensorDataINA219(1);
 	while (1)
 	{
@@ -2260,7 +2261,9 @@ main(void)
 			case '*':
 							
 			{        
-					printSensorDataCCS811(bool hexModeFlag)
+					enableI2Cpins(menuI2cPullupValue);
+					printSensorDataBME680(bool hexModeFlag, uint16_t menuI2cPullupValue);
+					disableI2Cpins();
 			}
 #endif
 			/*
