@@ -2258,7 +2258,7 @@ main(void)
 				
 				
 #ifdef WARP_BUILD_ENABLE_DEVCCS811
-			case '*':
+			case '!':
 							
 			{        
 					enableI2Cpins(menuI2cPullupValue);
