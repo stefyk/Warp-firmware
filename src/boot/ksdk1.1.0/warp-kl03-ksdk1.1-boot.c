@@ -419,8 +419,8 @@ enableSPIpins(void)
 	/*	Warp KL03_SPI_MOSI	--> PTA7	(ALT3)		*/
 	PORT_HAL_SetMuxMode(PORTA_BASE, 7, kPortMuxAlt3);
 
-	/*	Warp KL03_SPI_SCK	--> PTB0	(ALT3)		*/
-	PORT_HAL_SetMuxMode(PORTB_BASE, 0, kPortMuxAlt3);
+	/*	Warp KL03_SPI_SCK	--> PTB2	(ALT3)		*/
+	PORT_HAL_SetMuxMode(PORTB_BASE, 2, kPortMuxAlt3);
 
 
 	/*
@@ -450,8 +450,8 @@ disableSPIpins(void)
 	/*	Warp KL03_SPI_MOSI	--> PTA7	(GPIO)		*/
 	PORT_HAL_SetMuxMode(PORTA_BASE, 7, kPortMuxAsGpio);
 
-	/*	Warp KL03_SPI_SCK	--> PTB0	(GPIO)		*/
-	PORT_HAL_SetMuxMode(PORTB_BASE, 0, kPortMuxAsGpio);
+	/*	Warp KL03_SPI_SCK	--> PTB2	(GPIO)		*/
+	PORT_HAL_SetMuxMode(PORTB_BASE, 2, kPortMuxAsGpio);
 
 	GPIO_DRV_ClearPinOutput(kWarpPinSPI_MOSI);
 	GPIO_DRV_ClearPinOutput(kWarpPinSPI_MISO);
