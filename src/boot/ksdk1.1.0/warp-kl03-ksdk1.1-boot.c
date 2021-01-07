@@ -2194,8 +2194,12 @@ main(void)
 
 				break;
 			}
+#ifdef WARP_BUILD_ENABLE_BME680
+			case '+':
+				{
+					
 				
-#ifdef WARP_BUILD_ENABLE_DEVINA219
+/*#ifdef WARP_BUILD_ENABLE_DEVINA219
 			case '+':
 				
 				{        //bool hexModeFlag=1;
@@ -2217,7 +2221,7 @@ main(void)
 			 VBUS_MAX = 32V, VSHUNT_MAX = 0.32, RSHUNT = 0.1
 			 Calibration register: Cal = trunc (0.04096 / (Current_LSB * RSHUNT)), Cal = 40960 (0x1000)
 			*/		
-					
+/*					
 			enableI2Cpins(menuI2cPullupValue);
 			WriteStatusConfig = writeSensorRegisterINA219(0x00, 0x399F); // Write register configuration
 			WriteStatusCalib = writeSensorRegisterINA219(0x05, 0x1000); //calibration register
@@ -2255,7 +2259,7 @@ main(void)
 					break; 
 				}
 #endif
-				
+*/				
 				
 #ifdef WARP_BUILD_ENABLE_DEVBME680
 			case '!':
