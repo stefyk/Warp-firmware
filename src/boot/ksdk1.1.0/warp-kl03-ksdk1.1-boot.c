@@ -478,11 +478,11 @@ enableI2Cpins(uint8_t pullupValue)
 {
 	CLOCK_SYS_EnableI2cClock(0);
 
-	/*	Warp KL03_I2C0_SCL	--> PTB3	(ALT2 == I2C)		*/
-	PORT_HAL_SetMuxMode(PORTB_BASE, 3, kPortMuxAlt2);
+	/*	Warp KL03_I2C0_SCL	--> PTB0	(ALT2 == I2C)		*/
+	PORT_HAL_SetMuxMode(PORTB_BASE, 0, kPortMuxAlt2);
 
-	/*	Warp KL03_I2C0_SDA	--> PTB4	(ALT2 == I2C)		*/
-	PORT_HAL_SetMuxMode(PORTB_BASE, 4, kPortMuxAlt2);
+	/*	Warp KL03_I2C0_SDA	--> PTB1	(ALT2 == I2C)		*/
+	PORT_HAL_SetMuxMode(PORTB_BASE, 1, kPortMuxAlt2);
 
 
 	I2C_DRV_MasterInit(0 /* I2C instance */, (i2c_master_state_t *)&i2cMasterState);
@@ -498,11 +498,11 @@ disableI2Cpins(void)
 	I2C_DRV_MasterDeinit(0 /* I2C instance */);
 
 
-	/*	Warp KL03_I2C0_SCL	--> PTB3	(GPIO)			*/
-	PORT_HAL_SetMuxMode(PORTB_BASE, 3, kPortMuxAsGpio);
+	/*	Warp KL03_I2C0_SCL	--> PTB0	(GPIO)			*/
+	PORT_HAL_SetMuxMode(PORTB_BASE, 0, kPortMuxAsGpio);
 
-	/*	Warp KL03_I2C0_SDA	--> PTB4	(GPIO)			*/
-	PORT_HAL_SetMuxMode(PORTB_BASE, 4, kPortMuxAsGpio);
+	/*	Warp KL03_I2C0_SDA	--> PTB1	(GPIO)			*/
+	PORT_HAL_SetMuxMode(PORTB_BASE, 1, kPortMuxAsGpio);
 
 
 	/*
