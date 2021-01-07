@@ -1273,7 +1273,7 @@ main(void)
 #endif
 
 #ifdef WARP_BUILD_ENABLE_DEVBME680
-	initBME680(	0x77	/* i2cAddress */,	&deviceBME680State	);
+	initBME680(	0x76	/* i2cAddress */,	&deviceBME680State	);
 #endif
 
 #ifdef WARP_BUILD_ENABLE_DEVTCS34725
