@@ -97,8 +97,10 @@ writeSensorRegisterBME680(uint8_t deviceRegister, uint8_t payload, uint16_t menu
 	if (status != kStatus_I2C_Success)
 	{
 		return kWarpStatusDeviceCommunicationFailed;
+		SEGGER_RTT_WriteString(0, "Writing failed!\n");
 	}
 
+	SEGGER_RTT_WriteString(0, "Writing Successful!\n");
 	return kWarpStatusOK;
 }
 
@@ -142,9 +144,11 @@ readSensorRegisterBME680(uint8_t deviceRegister, int numberOfBytes)
 	if (status != kStatus_I2C_Success)
 	{
 		return kWarpStatusDeviceCommunicationFailed;
+		SEGGER_RTT_printf(0, "Reading failed/pins,");
 	}
 
 	return kWarpStatusOK;
+	SEGGER_RTT_printf(0, "Reading successful!/pins,");
 }
 
 
@@ -205,7 +209,9 @@ printSensorDataBME680(bool hexModeFlag, uint16_t menuI2cPullupValue)
 	triggerStatus = writeSensorRegisterBME680(kWarpSensorConfigurationRegisterBME680Ctrl_Meas,
 							0b00100101,
 							menuI2cPullupValue);
-
+		SEGGER_RTT_printf(0, "Trigger successful!,");
+	
+	
 	i2cReadStatusMSB = readSensorRegisterBME680(kWarpSensorOutputRegisterBME680press_msb, 1);
 	readSensorRegisterValueMSB = deviceBME680State.i2cBuffer[0];
 	i2cReadStatusLSB = readSensorRegisterBME680(kWarpSensorOutputRegisterBME680press_lsb, 1);
@@ -274,11 +280,11 @@ printSensorDataBME680(bool hexModeFlag, uint16_t menuI2cPullupValue)
 	{
 		if (hexModeFlag)
 		{
-			SEGGER_RTT_printf(0, " 0x%02x 0x%02x,", readSensorRegisterValueMSB, readSensorRegisterValueLSB);
+			SEGGER_RTT_printf(0, "Printing MSB and LSB 0x%02x 0x%02x,", readSensorRegisterValueMSB, readSensorRegisterValueLSB);
 		}
 		else
 		{
-			SEGGER_RTT_printf(0, " %u,", unsignedRawAdcValue);
+			SEGGER_RTT_printf(0, "UnsignedRawADCValue %u,", unsignedRawAdcValue);
 		}
 	}
 }
