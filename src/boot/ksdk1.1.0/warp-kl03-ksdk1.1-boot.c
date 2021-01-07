@@ -2257,7 +2257,7 @@ main(void)
 #endif
 				
 				
-#ifdef WARP_BUILD_ENABLE_DEVCCS811
+#ifdef WARP_BUILD_ENABLE_DEVBME680
 			case '!':
 							
 			{        
