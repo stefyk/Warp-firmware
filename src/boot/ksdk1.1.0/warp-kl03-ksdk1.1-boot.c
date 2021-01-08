@@ -84,7 +84,7 @@
 //#include "devRV8803C7.h"
 //#include "devISL23415.h"
 #else
-#	include "devCCS811.h"
+#	include "devMMA8451Q.h"
 #endif
 
 
