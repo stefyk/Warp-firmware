@@ -249,7 +249,7 @@ printSensorDataCCS811(bool hexModeFlag)
 	uint16_t	readSensorRegisterValueLSB;
 	uint16_t	readSensorRegisterValueMSB;
 	int16_t		readSensorRegisterValueCombined;
-	int16_t		Vref
+	int16_t		Vref;
 	int16_t		Vntc;
 	int16_t		Rntc;
 	double 		ntctemp;
