@@ -221,12 +221,11 @@ printSensorDataCCS811(bool hexModeFlag)
 	int16_t		equivalentCO2, TVOC;
 	int16_t		threshold;
 	time_t 		seconds;
-	bool  		aboveThreshold = false;
-	bool  		Ready = false;
-	float  		counter;
-	float  		bpm;
-	float  		offset =0;
-	float 		timepassed =0;
+	bool  		aboveThreshold;
+	bool  		Ready;
+	
+	
+	
 	
 	WarpStatus	i2cReadStatus;
 
@@ -254,14 +253,21 @@ printSensorDataCCS811(bool hexModeFlag)
 		}
 		else
 		{
+			float  		bpm;
+			float  		offset =0;
+			float 		timepassed =0;
+			float  		counter = 1;
+			
+			
 			seconds = time(NULL);
-			timepassed = time(NULL) - offset;
+			timepassed = seconds - offset;
 				
 				if(timepassed >= 0 && timepassed < 20000)
    					{
    					 Ready = 0;
    					 if(equivalentCO2 > threshold && !aboveThreshold) //detects when the signal has passed the threshold and is on the risign edge
      						{
+								SEGGER_RTT_printf(0, "Breath detected!",);
     							counter++;   // counts up the beats detected
        							aboveThreshold = true;
       						}
@@ -277,7 +283,7 @@ printSensorDataCCS811(bool hexModeFlag)
   						bpm = counter*3;   // Compute bpm
    						counter = 0;
    						Ready = 1;
-   						offset = time(NULL);  // Reset Counter
+   						offset = seconds;  // Reset Counter
    					}
 				 
 				
@@ -291,7 +297,7 @@ printSensorDataCCS811(bool hexModeFlag)
        			//			aboveThreshold = false;  
      			//			}
 			
-			SEGGER_RTT_printf(0, " %d, %d, %d,", equivalentCO2, TVOC, bpm);
+			SEGGER_RTT_printf(0, " %d, %d, %d,", equivalentCO2, TVOC, bpm, seconds);
 		}
 	}
 }
