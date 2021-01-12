@@ -249,13 +249,19 @@ printSensorDataCCS811(bool hexModeFlag)
 	uint16_t	readSensorRegisterValueLSB;
 	uint16_t	readSensorRegisterValueMSB;
 	int16_t		readSensorRegisterValueCombined;
+	int16_t		Vref
+	int16_t		Vntc;
+	int16_t		Rntc;
+	double 		ntctemp;
 	int16_t		equivalentCO2, TVOC;
+	
 	WarpStatus	i2cReadStatus;
 
 
 	i2cReadStatus	= readSensorRegisterCCS811(kWarpSensorOutputRegisterCCS811ALG_DATA, 4 /* numberOfBytes */);
 	equivalentCO2	= (deviceCCS811State.i2cBuffer[0] << 8) | deviceCCS811State.i2cBuffer[1];
 	TVOC		= (deviceCCS811State.i2cBuffer[2] << 8) | deviceCCS811State.i2cBuffer[3];
+	
 	if (i2cReadStatus != kWarpStatusOK)
 	{
 		SEGGER_RTT_WriteString(0, " ----, ----,");
@@ -302,13 +308,14 @@ printSensorDataCCS811(bool hexModeFlag)
 		}
 	}
 	/*
-	 *	Get Voltage across V_REF
+	 *	Get Voltage across V_REF is taken from register byte 0 and byte 1
 	 */
 	i2cReadStatus = readSensorRegisterCCS811(kWarpSensorOutputRegisterCCS811RAW_REF_NTC, 4 /* numberOfBytes */);
 	readSensorRegisterValueLSB = deviceCCS811State.i2cBuffer[0];
 	readSensorRegisterValueMSB = deviceCCS811State.i2cBuffer[1];
 	readSensorRegisterValueCombined = ((readSensorRegisterValueMSB) << 8) | (readSensorRegisterValueLSB);
-
+	Vref = readSensorRegisterValueCombined;
+	
 	if (i2cReadStatus != kWarpStatusOK)
 	{
 		SEGGER_RTT_WriteString(0, " ----,");
@@ -321,15 +328,30 @@ printSensorDataCCS811(bool hexModeFlag)
 		}
 		else
 		{
-			SEGGER_RTT_printf(0, " %d,", readSensorRegisterValueCombined);
+			SEGGER_RTT_printf(0, " %d,", Vref);
 		}
 	}
   /*
-	 *	Get Voltage across R_NTC
+	 *	Get Voltage across R_NTC and turn it into temperature
 	 */
+	
+	//getting the values separately for the MSV and LSB and then combining them by shifting the MSB with 8 bits and then adding the buf[3] 
+	// which is the LSB
 	readSensorRegisterValueLSB = deviceCCS811State.i2cBuffer[2];
 	readSensorRegisterValueMSB = deviceCCS811State.i2cBuffer[3];
 	readSensorRegisterValueCombined = ((readSensorRegisterValueMSB) << 8) | (readSensorRegisterValueLSB);
+	Vntc = readSensorRegisterValueCombined;
+	
+	//conversion  of Vntc into Rntc
+	Rntc = Vntc * 100 / Vref;
+	
+	//conversion of ntctemp
+  ntctemp = log((double)Rntc / 100); 			// 1
+  ntctemp /= 3380;                                   // 2
+  ntctemp += 1.0 / (25 + 273.15);                    // 3
+  ntctemp = 1.0 / ntctemp;                          // 4
+  ntctemp -= 273.15;                                 // 5
+  
 
 	if (i2cReadStatus != kWarpStatusOK)
 	{
@@ -343,7 +365,7 @@ printSensorDataCCS811(bool hexModeFlag)
 		}
 		else
 		{
-			SEGGER_RTT_printf(0, " %d,", readSensorRegisterValueCombined);
+			SEGGER_RTT_printf(0, " %d,", ntctemp);
 		}
 	}
 }
