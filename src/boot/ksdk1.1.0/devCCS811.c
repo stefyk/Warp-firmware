@@ -346,12 +346,13 @@ printSensorDataCCS811(bool hexModeFlag)
 	//conversion  of Vntc into Rntc
 	Rntc = Vntc * 100 / Vref;
 	
+	//ntctemp = 
 	//conversion of ntctemp
-  ntctemp = log((int16_t)Rntc / 100); 			// 1
-  ntctemp /= 3380;                                   // 2
-  ntctemp += 1.0 / (25 + 273.15);                    // 3
-  ntctemp = 1.0 / ntctemp;                          // 4
-  ntctemp -= 273.15;                                 // 5
+ // ntctemp = log((int16_t)Rntc / 100); 			// 1
+ // ntctemp /= 3380;                                   // 2
+ // ntctemp += 1.0 / (25 + 273.15);                    // 3
+//  ntctemp = 1.0 / ntctemp;                          // 4
+//  ntctemp -= 273.15;                                 // 5
   
 
 	if (i2cReadStatus != kWarpStatusOK)
@@ -366,7 +367,7 @@ printSensorDataCCS811(bool hexModeFlag)
 		}
 		else
 		{
-			SEGGER_RTT_printf(0, " %d,", ntctemp);
+			SEGGER_RTT_printf(0, " %d,", Rntc);
 		}
 	}
 }
