@@ -253,8 +253,8 @@ printSensorDataCCS811(bool hexModeFlag)
 	int16_t		Vref;
 	int16_t		Vntc;
 	int16_t		Rntc;
-	int16_t		ntctemp;
 	int16_t		equivalentCO2, TVOC;
+	int16_t		threshold;
 	
 	WarpStatus	i2cReadStatus;
 
@@ -262,6 +262,7 @@ printSensorDataCCS811(bool hexModeFlag)
 	i2cReadStatus	= readSensorRegisterCCS811(kWarpSensorOutputRegisterCCS811ALG_DATA, 4 /* numberOfBytes */);
 	equivalentCO2	= (deviceCCS811State.i2cBuffer[0] << 8) | deviceCCS811State.i2cBuffer[1];
 	TVOC		= (deviceCCS811State.i2cBuffer[2] << 8) | deviceCCS811State.i2cBuffer[3];
+	threshold	= 1000;
 	
 	if (i2cReadStatus != kWarpStatusOK)
 	{
@@ -279,6 +280,14 @@ printSensorDataCCS811(bool hexModeFlag)
 		}
 		else
 		{
+			for (int i=1; i<61; i++)
+					{
+				
+				if (equivalentCO2 > threshold)
+						{
+						SEGGER_RTT_printf(0, "Breath detected!");
+						}
+					}
 			SEGGER_RTT_printf(0, " %d, %d,", equivalentCO2, TVOC);
 		}
 	}
