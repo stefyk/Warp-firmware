@@ -49,6 +49,7 @@
 #include "gpio_pins.h"
 #include "SEGGER_RTT.h"
 #include "warp.h"
+//#include "math.h"
 
 
 
@@ -252,7 +253,7 @@ printSensorDataCCS811(bool hexModeFlag)
 	int16_t		Vref;
 	int16_t		Vntc;
 	int16_t		Rntc;
-	double 		ntctemp;
+	int16_t		ntctemp;
 	int16_t		equivalentCO2, TVOC;
 	
 	WarpStatus	i2cReadStatus;
