@@ -347,7 +347,7 @@ printSensorDataCCS811(bool hexModeFlag)
 	Rntc = Vntc * 100 / Vref;
 	
 	//conversion of ntctemp
-  ntctemp = log((double)Rntc / 100); 			// 1
+  ntctemp = log((int16_t)Rntc / 100); 			// 1
   ntctemp /= 3380;                                   // 2
   ntctemp += 1.0 / (25 + 273.15);                    // 3
   ntctemp = 1.0 / ntctemp;                          // 4
