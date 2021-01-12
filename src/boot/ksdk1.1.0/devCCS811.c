@@ -253,6 +253,7 @@ printSensorDataCCS811(bool hexModeFlag)
 		}
 		else
 		{
+			SEGGER_RTT_printf(0, "Into loop1!");
 			bool  		Ready;
 			float  		bpm;
 			float  		offset =0;
@@ -265,6 +266,7 @@ printSensorDataCCS811(bool hexModeFlag)
 				
 				if(timepassed >= 0 && timepassed < 20000)
    					{
+						SEGGER_RTT_printf(0, "Into loop2!");
    					 Ready = 0;
    					 if(equivalentCO2 > threshold && !aboveThreshold) //detects when the signal has passed the threshold and is on the risign edge
      						{
