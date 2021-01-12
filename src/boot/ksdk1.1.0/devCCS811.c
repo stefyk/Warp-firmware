@@ -222,7 +222,7 @@ printSensorDataCCS811(bool hexModeFlag)
 	int16_t		threshold;
 	time_t 		seconds;
 	bool  		aboveThreshold;
-	bool  		Ready;
+	
 	
 	
 	
@@ -253,6 +253,7 @@ printSensorDataCCS811(bool hexModeFlag)
 		}
 		else
 		{
+			bool  		Ready;
 			float  		bpm;
 			float  		offset =0;
 			float 		timepassed =0;
@@ -267,7 +268,7 @@ printSensorDataCCS811(bool hexModeFlag)
    					 Ready = 0;
    					 if(equivalentCO2 > threshold && !aboveThreshold) //detects when the signal has passed the threshold and is on the risign edge
      						{
-								SEGGER_RTT_printf(0, "Breath detected!",);
+								SEGGER_RTT_printf(0, "Breath detected!");
     							counter++;   // counts up the beats detected
        							aboveThreshold = true;
       						}
