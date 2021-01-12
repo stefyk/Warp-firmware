@@ -212,15 +212,14 @@ readSensorRegisterCCS811(uint8_t deviceRegister, int numberOfBytes)
 void
 printSensorDataCCS811(bool hexModeFlag)
 {
-	uint16_t	readSensorRegisterValueLSB;
-	uint16_t	readSensorRegisterValueMSB;
-	int16_t		readSensorRegisterValueCombined;
-	int16_t		Vref;
-	int16_t		Vntc;
-	int16_t		Rntc;
+	//uint16_t	readSensorRegisterValueLSB;
+	//uint16_t	readSensorRegisterValueMSB;
+	//int16_t		readSensorRegisterValueCombined;
+	//int16_t		Vref;
+	//int16_t		Vntc;
+	//int16_t		Rntc;
 	int16_t		equivalentCO2, TVOC;
 	int16_t		threshold;
-	bool  		aboveThreshold; 
 	time_t 		seconds;
 	bool  		aboveThreshold = false;
 	bool  		Ready = false;
@@ -295,3 +294,4 @@ printSensorDataCCS811(bool hexModeFlag)
 			SEGGER_RTT_printf(0, " %d, %d, %d,", equivalentCO2, TVOC, bpm);
 		}
 	}
+}
