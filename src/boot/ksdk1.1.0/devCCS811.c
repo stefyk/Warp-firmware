@@ -255,7 +255,7 @@ printSensorDataCCS811(bool hexModeFlag)
 	int16_t		Rntc;
 	int16_t		equivalentCO2, TVOC;
 	int16_t		threshold;
-	int16_t		value;
+	bool  		aboveThreshold; 
 	
 	WarpStatus	i2cReadStatus;
 
@@ -285,9 +285,10 @@ printSensorDataCCS811(bool hexModeFlag)
 			
 					
 				value = 1; 
-				if (equivalentCO2 > threshold && value < threshold)
+				bool  aboveThreshold = false;
+				if (equivalentCO2 > threshold && !aboveThreshold)
 						{
-						value = equivalentCO2;
+						aboveThreshold = true;
 						SEGGER_RTT_printf(0, "Breath detected!");
 						}
 					
