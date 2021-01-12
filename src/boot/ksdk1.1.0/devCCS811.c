@@ -291,7 +291,10 @@ printSensorDataCCS811(bool hexModeFlag)
 						aboveThreshold = true;
 						SEGGER_RTT_printf(0, "Breath detected!");
 						}
-					
+				if(equivalentCO2 < threshold) 
+      						{
+       						aboveThreshold = false;  
+     						}
 			SEGGER_RTT_printf(0, " %d, %d,", equivalentCO2, TVOC);
 		}
 	}
