@@ -1,40 +1,5 @@
-/*
-	Authored 2016-2018. Phillip Stanley-Marbell, Youchao Wang.
-
-	All rights reserved.
-
-	Redistribution and use in source and binary forms, with or without
-	modification, are permitted provided that the following conditions
-	are met:
-
-	*	Redistributions of source code must retain the above
-		copyright notice, this list of conditions and the following
-		disclaimer.
-
-	*	Redistributions in binary form must reproduce the above
-		copyright notice, this list of conditions and the following
-		disclaimer in the documentation and/or other materials
-		provided with the distribution.
-
-	*	Neither the name of the author nor the names of its
-		contributors may be used to endorse or promote products
-		derived from this software without specific prior written
-		permission.
-
-	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-	"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-	LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-	FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-	COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-	INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-	BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-	LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-	CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-	LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-	ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-	POSSIBILITY OF SUCH DAMAGE.
-*/
 #include <stdlib.h>
+#include <time.h> 
 
 #include "fsl_misc_utilities.h"
 #include "fsl_device_registers.h"
@@ -256,6 +221,13 @@ printSensorDataCCS811(bool hexModeFlag)
 	int16_t		equivalentCO2, TVOC;
 	int16_t		threshold;
 	bool  		aboveThreshold; 
+	time_t 		seconds;
+	bool  		aboveThreshold = false;
+	bool  		Ready = false;
+	float  		counter;
+	float  		bpm;
+	float  		offset =0;
+	float 		timepassed =0;
 	
 	WarpStatus	i2cReadStatus;
 
@@ -264,6 +236,7 @@ printSensorDataCCS811(bool hexModeFlag)
 	equivalentCO2	= (deviceCCS811State.i2cBuffer[0] << 8) | deviceCCS811State.i2cBuffer[1];
 	TVOC		= (deviceCCS811State.i2cBuffer[2] << 8) | deviceCCS811State.i2cBuffer[3];
 	threshold	= 1000;
+    
 			
 	
 	if (i2cReadStatus != kWarpStatusOK)
@@ -282,108 +255,43 @@ printSensorDataCCS811(bool hexModeFlag)
 		}
 		else
 		{
-			
-					
+			seconds = time(NULL);
+			timepassed = time(NULL) - offset;
 				
-				bool  aboveThreshold = false;
-				if (equivalentCO2 > threshold && !aboveThreshold)
-						{
-						aboveThreshold = true;
-						SEGGER_RTT_printf(0, "Breath detected!");
-						}
-				if(equivalentCO2 < threshold) 
+				if(timepassed >= 0 && timepassed < 20000)
+   					{
+   					 Ready = 0;
+   					 if(equivalentCO2 > threshold && !aboveThreshold) //detects when the signal has passed the threshold and is on the risign edge
+     						{
+    							counter++;   // counts up the beats detected
+       							aboveThreshold = true;
+      						}
+
+    				if(equivalentCO2 < threshold) // if the value crosses the threshold but it is on the falling edge it does not detect a beat
       						{
-       						aboveThreshold = false;  
-     						}
-			SEGGER_RTT_printf(0, " %d, %d,", equivalentCO2, TVOC);
+       							aboveThreshold = false;  
+      						}
+     
+   					}
+   				if(timepassed >= 20000) //once 10 seconds have passed, it estimates the beats per minute
+  					{
+  						bpm = counter*3;   // Compute bpm
+   						counter = 0;
+   						Ready = 1;
+   						offset = time(NULL);  // Reset Counter
+   					}
+				 
+				
+				//if (equivalentCO2 > threshold && !aboveThreshold)
+				//		{
+				//		aboveThreshold = true;
+				//		SEGGER_RTT_printf(0, "Breath detected!");
+				//		}
+				//if(equivalentCO2 < threshold) 
+      			//			{
+       			//			aboveThreshold = false;  
+     			//			}
+			
+			SEGGER_RTT_printf(0, " %d, %d, %d,", equivalentCO2, TVOC, bpm);
 		}
 	}
-
-	i2cReadStatus = readSensorRegisterCCS811(kWarpSensorOutputRegisterCCS811RAW_DATA, 2 /* numberOfBytes */);
-	readSensorRegisterValueLSB = deviceCCS811State.i2cBuffer[0];
-	readSensorRegisterValueMSB = deviceCCS811State.i2cBuffer[1];
-
-	/*
-	 *	RAW ADC value. See CCS811 manual, Figure 15:
-	 */
-	readSensorRegisterValueCombined =
-						((readSensorRegisterValueLSB & 0x03) << 8) |
-						(readSensorRegisterValueMSB & 0xFF);
-	if (i2cReadStatus != kWarpStatusOK)
-	{
-		SEGGER_RTT_WriteString(0, " ----,");
-	}
-	else
-	{
-		if (hexModeFlag)
-		{
-			SEGGER_RTT_printf(0, " 0x%02x 0x%02x,", readSensorRegisterValueMSB, readSensorRegisterValueLSB);
-		}
-		else
-		{
-			SEGGER_RTT_printf(0, " %d,", readSensorRegisterValueCombined);
-		}
-	}
-	/*
-	 *	Get Voltage across V_REF is taken from register byte 0 and byte 1
-	 */
-	i2cReadStatus = readSensorRegisterCCS811(kWarpSensorOutputRegisterCCS811RAW_REF_NTC, 4 /* numberOfBytes */);
-	readSensorRegisterValueLSB = deviceCCS811State.i2cBuffer[0];
-	readSensorRegisterValueMSB = deviceCCS811State.i2cBuffer[1];
-	readSensorRegisterValueCombined = ((readSensorRegisterValueMSB) << 8) | (readSensorRegisterValueLSB);
-	Vref = readSensorRegisterValueCombined;
-	
-	if (i2cReadStatus != kWarpStatusOK)
-	{
-		SEGGER_RTT_WriteString(0, " ----,");
-	}
-	else
-	{
-		if (hexModeFlag)
-		{
-			SEGGER_RTT_printf(0, " 0x%02x 0x%02x,", readSensorRegisterValueMSB, readSensorRegisterValueLSB);
-		}
-		else
-		{
-			SEGGER_RTT_printf(0, " %d,", Vref);
-		}
-	}
-  /*
-	 *	Get Voltage across R_NTC and turn it into temperature
-	 */
-	
-	//getting the values separately for the MSV and LSB and then combining them by shifting the MSB with 8 bits and then adding the buf[3] 
-	// which is the LSB
-	readSensorRegisterValueLSB = deviceCCS811State.i2cBuffer[2];
-	readSensorRegisterValueMSB = deviceCCS811State.i2cBuffer[3];
-	readSensorRegisterValueCombined = ((readSensorRegisterValueMSB) << 8) | (readSensorRegisterValueLSB);
-	Vntc = readSensorRegisterValueCombined;
-	
-	//conversion  of Vntc into Rntc
-	Rntc = Vntc * 100 / Vref;
-	
-	//ntctemp = 
-	//conversion of ntctemp
- // ntctemp = log((int16_t)Rntc / 100); 			// 1
- // ntctemp /= 3380;                                   // 2
- // ntctemp += 1.0 / (25 + 273.15);                    // 3
-//  ntctemp = 1.0 / ntctemp;                          // 4
-//  ntctemp -= 273.15;                                 // 5
-  
-
-	if (i2cReadStatus != kWarpStatusOK)
-	{
-		SEGGER_RTT_WriteString(0, " ----,");
-	}
-	else
-	{
-		if (hexModeFlag)
-		{
-			SEGGER_RTT_printf(0, " 0x%02x 0x%02x,", readSensorRegisterValueMSB, readSensorRegisterValueLSB);
-		}
-		else
-		{
-			SEGGER_RTT_printf(0, " %d,", Rntc);
-		}
-	}
-}
