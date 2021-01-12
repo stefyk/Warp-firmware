@@ -284,7 +284,7 @@ printSensorDataCCS811(bool hexModeFlag)
 		{
 			
 					
-				value = 1; 
+				
 				bool  aboveThreshold = false;
 				if (equivalentCO2 > threshold && !aboveThreshold)
 						{
