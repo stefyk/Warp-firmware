@@ -27,10 +27,10 @@ int16_t		threshold;
 time_t 		seconds;
 bool  		aboveThreshold;
 bool  		Ready;
-float  		bpm;
-float  		offset =0;
-float 		timepassed =0;
-float  		counter = 1;
+float  		RR;
+float  		offset = 0;
+float 		timepassed;
+float  		counter = 0;
 
 
 /*
@@ -254,7 +254,7 @@ printSensorDataCCS811(bool hexModeFlag)
 		}
 		else
 		{
-			SEGGER_RTT_printf(0, "Into loop1!");
+			//SEGGER_RTT_printf(0, "Into loop1!");
 			
 			
 			seconds = time(NULL);
@@ -275,6 +275,7 @@ printSensorDataCCS811(bool hexModeFlag)
 
     				if(equivalentCO2 < threshold) // if the value crosses the threshold but it is on the falling edge it does not detect a beat
       						{
+								SEGGER_RTT_printf(0, "Into loop 2!");
        							aboveThreshold = false;
 								SEGGER_RTT_printf(0, "No Breath detected!");
       						}
@@ -283,7 +284,8 @@ printSensorDataCCS811(bool hexModeFlag)
 					
    				if(timepassed >= 20000) //once 10 seconds have passed, it estimates the beats per minute
   					{
-  						bpm = counter*3;   // Compute bpm
+						SEGGER_RTT_printf(0, "Into loop 3!");
+  						RR = counter*3;   // Compute bpm
    						counter = 0;
    						Ready = 1;
    						offset = seconds;  // Reset Counter
@@ -300,7 +302,7 @@ printSensorDataCCS811(bool hexModeFlag)
        			//			aboveThreshold = false;  
      			//			}
 			
-			SEGGER_RTT_printf(0, " %d, %d, %d, %d, %d", equivalentCO2, TVOC, bpm, counter, seconds);
+			SEGGER_RTT_printf(0, " %d, %d, %d, %d, %d", equivalentCO2, TVOC, RR, counter, timepassed);
 		}
 	}
 }
