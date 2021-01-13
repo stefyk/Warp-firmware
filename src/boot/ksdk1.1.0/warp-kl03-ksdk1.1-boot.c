@@ -1,28 +1,57 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@stefyk 
+Learn Git and GitHub without any code!
+Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
+
+
+stefyk
+/
+Warp-firmware
+forked from physical-computation/Warp-firmware
+0
+0120
+Code
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+Warp-firmware/src/boot/ksdk1.1.0/warp-kl03-ksdk1.1-boot.c
+@stefyk
+stefyk Update warp-kl03-ksdk1.1-boot.c
+Latest commit 18a2e59 2 hours ago
+ History
+ 9 contributors
+@Siegfriedchao@chaturatbs@phillipstanleymarbell@stefyk@lilrabbits@btsouts@JamesTimothyMeech@richardhenryhopper@gm662
+Executable File  3678 lines (3136 sloc)  108 KB
+  
 /*
 	Authored 2016-2018. Phillip Stanley-Marbell.
-
 	Additional contributions, 2018 onwards: Jan Heck, Chatura Samarakoon, Youchao Wang, Sam Willis.
-
 	All rights reserved.
-
 	Redistribution and use in source and binary forms, with or without
 	modification, are permitted provided that the following conditions
 	are met:
-
 	*	Redistributions of source code must retain the above
 		copyright notice, this list of conditions and the following
 		disclaimer.
-
 	*	Redistributions in binary form must reproduce the above
 		copyright notice, this list of conditions and the following
 		disclaimer in the documentation and/or other materials
 		provided with the distribution.
-
 	*	Neither the name of the author nor the names of its
 		contributors may be used to endorse or promote products
 		derived from this software without specific prior written
 		permission.
-
 	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 	"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 	LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -980,7 +1009,6 @@ dumpProcessorState(void)
 {
 /*
 	uint32_t	cpuClockFrequency;
-
 	CLOCK_SYS_GetFreq(kCoreClock, &cpuClockFrequency);
 #ifdef WARP_BUILD_ENABLE_SEGGER_RTT_PRINTF
 	SEGGER_RTT_printf(0, "\r\n\n\tCPU @ %u KHz\n", (cpuClockFrequency / 1000));
