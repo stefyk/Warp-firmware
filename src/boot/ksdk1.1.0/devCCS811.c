@@ -27,10 +27,11 @@ int16_t		threshold;
 time_t 		seconds;
 bool  		aboveThreshold;
 bool  		Ready;
-float  		RR;
-float  		offset = 0;
-float 		timepassed;
-float  		counter = 0;
+int16_t  	RR;
+int16_t  	counter = 0;
+time_t		offset = 0;
+time_t		timepassed;
+
 
 
 /*
