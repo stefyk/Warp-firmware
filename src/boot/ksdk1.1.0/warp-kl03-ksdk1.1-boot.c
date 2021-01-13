@@ -2688,6 +2688,9 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag, int menuDelay
 		#endif
 		#ifdef WARP_BUILD_ENABLE_DEVCCS811
 		printSensorDataCCS811(hexModeFlag);
+		int16_t		threshold;
+		bool  		aboveThreshold;
+		threshold	= 1000;
 		#endif
 		#ifdef WARP_BUILD_ENABLE_DEVHDC1000
 		printSensorDataHDC1000(hexModeFlag);
