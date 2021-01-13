@@ -24,12 +24,12 @@ extern volatile uint32_t		gWarpI2cTimeoutMilliseconds;
 extern volatile uint32_t		gWarpSupplySettlingDelayMilliseconds;
 
 int16_t		threshold;
-time_t 		seconds;
+clock_t 	seconds;
 bool  		aboveThreshold;
 int16_t  	RR;
 int16_t  	counter = 0;
-time_t		offset = 0;
-time_t		timepassed;
+clock_t		offset = 0;
+clock_t		timepassed;
 
 
 
@@ -257,11 +257,11 @@ printSensorDataCCS811(bool hexModeFlag)
 			//SEGGER_RTT_printf(0, "Into loop1!");
 			
 			
-			seconds = time(NULL);
+			seconds = clock();
 			timepassed = seconds - offset;
 			//SEGGER_RTT_printf(0, "%d, %d", timepassed, seconds );
 				
-				if(timepassed >= 0 && timepassed < 20)
+				if(timepassed / CLOCKS_PER_SEC >= 0 && timepassed / CLOCKS_PER_SEC < 20)
    					{
 						
 						
@@ -302,7 +302,7 @@ printSensorDataCCS811(bool hexModeFlag)
        			//			aboveThreshold = false;  
      			//			}
 			
-			SEGGER_RTT_printf(0, " %d, %d, %d", equivalentCO2, RR, seconds);
+			SEGGER_RTT_printf(0, " %d, %d, %d", equivalentCO2, RR, seconds / CLOCKS_PER_SEC);
 		}
 	}
 }
