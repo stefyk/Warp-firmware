@@ -254,12 +254,12 @@ printSensorDataCCS811(bool hexModeFlag)
 		}
 		else
 		{
-			SEGGER_RTT_printf(0, "Into loop1!");
+			//SEGGER_RTT_printf(0, "Into loop1!");
 			
 			
 			seconds = time(NULL);
 			timepassed = seconds - offset;
-			SEGGER_RTT_printf(0, "%d, %d", timepassed, seconds );
+			//SEGGER_RTT_printf(0, "%d, %d", timepassed, seconds );
 				
 				if(timepassed >= 0 && timepassed < 20)
    					{
