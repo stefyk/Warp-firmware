@@ -60,6 +60,9 @@ extern volatile uint32_t		gWarpI2cTimeoutMilliseconds;
 extern volatile uint32_t		gWarpSupplySettlingDelayMilliseconds;
 
 
+int16_t		threshold;
+bool  		aboveThreshold;
+threshold	= 1000;
 
 /*
  *	CCS811.
