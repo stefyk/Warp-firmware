@@ -1678,8 +1678,6 @@ main(void)
 				break;
 			}
 
-#endif
-
 			/*
 			 *	Switch to RUN
 			 */
