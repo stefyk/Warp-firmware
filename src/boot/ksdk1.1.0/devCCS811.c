@@ -262,7 +262,7 @@ printSensorDataCCS811(bool hexModeFlag)
 			timepassed = seconds - offset;
 			SEGGER_RTT_printf(0, "%d, %d", timepassed, seconds );
 				
-				if(timepassed >= 0 && timepassed < 20000)
+				if(timepassed >= 0 && timepassed < 20)
    					{
 						SEGGER_RTT_printf(0, "Into loop2!");
 						Ready = 0;
@@ -284,7 +284,7 @@ printSensorDataCCS811(bool hexModeFlag)
      
    					}
 					
-   				if(timepassed >= 20000) //once 10 seconds have passed, it estimates the beats per minute
+   				else //once 10 seconds have passed, it estimates the beats per minute
   					{
 						SEGGER_RTT_printf(0, "Into loop 3!");
   						RR = counter*3;   // Compute bpm
