@@ -1877,8 +1877,8 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag, int menuDelay
 		
 		//SEGGER_RTT_WriteString(0, " RTC->TSR, RTC->TPR, # Config Errors");
 		//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-		//SEGGER_RTT_WriteString(0, "\n\n");
-		//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		SEGGER_RTT_WriteString(0, "\n\n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	}
 
 
