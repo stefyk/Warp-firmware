@@ -1861,8 +1861,8 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag, int menuDelay
 
 	if (printHeadersAndCalibration)
 	{
-		SEGGER_RTT_WriteString(0, "Measurement number, RTC->TSR, RTC->TPR,");
-		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		//SEGGER_RTT_WriteString(0, "Measurement number, RTC->TSR, RTC->TPR,");
+		//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 		
 		#ifdef WARP_BUILD_ENABLE_DEVBME680
@@ -1871,22 +1871,22 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag, int menuDelay
 		#endif
 		
 		#ifdef WARP_BUILD_ENABLE_DEVCCS811
-		SEGGER_RTT_WriteString(0, " CCS811 ECO2, CCS811 TVOC, CCS811 BPM,");
+		SEGGER_RTT_WriteString(0, " CCS811 ECO2, CCS811 RR,");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		#endif
 		
-		SEGGER_RTT_WriteString(0, " RTC->TSR, RTC->TPR, # Config Errors");
-		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-		SEGGER_RTT_WriteString(0, "\n\n");
-		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		//SEGGER_RTT_WriteString(0, " RTC->TSR, RTC->TPR, # Config Errors");
+		//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		//SEGGER_RTT_WriteString(0, "\n\n");
+		//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	}
 
 
 	while(1)
 	{
-		#ifdef WARP_BUILD_ENABLE_SEGGER_RTT_PRINTF
-		SEGGER_RTT_printf(0, "%u, %d, %d,", readingCount, RTC->TSR, RTC->TPR);
-		#endif
+		//#ifdef WARP_BUILD_ENABLE_SEGGER_RTT_PRINTF
+		//SEGGER_RTT_printf(0, "%u, %d, %d,", readingCount, RTC->TSR, RTC->TPR);
+		//#endif
 
 		
 		#ifdef WARP_BUILD_ENABLE_DEVBME680
@@ -1899,9 +1899,9 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag, int menuDelay
 		
 
 
-		#ifdef WARP_BUILD_ENABLE_SEGGER_RTT_PRINTF
-		SEGGER_RTT_printf(0, " %d, %d, %d\n", RTC->TSR, RTC->TPR, numberOfConfigErrors);
-		#endif
+		//#ifdef WARP_BUILD_ENABLE_SEGGER_RTT_PRINTF
+		//SEGGER_RTT_printf(0, " %d, %d, %d\n", RTC->TSR, RTC->TPR, numberOfConfigErrors);
+		//#endif
 
 		if (menuDelayBetweenEachRun > 0)
 		{
