@@ -26,7 +26,6 @@ extern volatile uint32_t		gWarpSupplySettlingDelayMilliseconds;
 int16_t		threshold;
 time_t 		seconds;
 bool  		aboveThreshold;
-bool  		Ready;
 int16_t  	RR;
 int16_t  	counter = 0;
 time_t		offset = 0;
@@ -264,8 +263,8 @@ printSensorDataCCS811(bool hexModeFlag)
 				
 				if(timepassed >= 0 && timepassed < 20)
    					{
-						SEGGER_RTT_printf(0, "Into loop2!");
-						Ready = 0;
+						
+						
 						
 						
    					if(equivalentCO2 > threshold && !aboveThreshold) //detects when the signal has passed the threshold and is on the risign edge
@@ -277,7 +276,7 @@ printSensorDataCCS811(bool hexModeFlag)
 
     				if(equivalentCO2 < threshold) // if the value crosses the threshold but it is on the falling edge it does not detect a beat
       						{
-								SEGGER_RTT_printf(0, "Into loop 2!");
+								
        							aboveThreshold = false;
 								SEGGER_RTT_printf(0, "No Breath detected!");
       						}
@@ -286,7 +285,7 @@ printSensorDataCCS811(bool hexModeFlag)
 					
    				else //once 10 seconds have passed, it estimates the beats per minute
   					{
-						SEGGER_RTT_printf(0, "Into loop 3!");
+						
   						RR = counter*3;   // Compute bpm
    						counter = 0;
    						Ready = 1;
@@ -304,7 +303,7 @@ printSensorDataCCS811(bool hexModeFlag)
        			//			aboveThreshold = false;  
      			//			}
 			
-			SEGGER_RTT_printf(0, " %d, %d, %d, %d, %d", equivalentCO2, TVOC, RR, counter, timepassed);
+			SEGGER_RTT_printf(0, " %d, %d", equivalentCO2, RR);
 		}
 	}
 }
