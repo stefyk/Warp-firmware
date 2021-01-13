@@ -62,7 +62,6 @@ extern volatile uint32_t		gWarpSupplySettlingDelayMilliseconds;
 
 int16_t		threshold;
 bool  		aboveThreshold;
-threshold	= 1000;
 
 /*
  *	CCS811.
@@ -267,7 +266,7 @@ printSensorDataCCS811(bool hexModeFlag)
 	i2cReadStatus	= readSensorRegisterCCS811(kWarpSensorOutputRegisterCCS811ALG_DATA, 4 /* numberOfBytes */);
 	equivalentCO2	= (deviceCCS811State.i2cBuffer[0] << 8) | deviceCCS811State.i2cBuffer[1];
 	TVOC		= (deviceCCS811State.i2cBuffer[2] << 8) | deviceCCS811State.i2cBuffer[3];
-//	threshold	= 1000;
+	threshold	= 1000;
 			
 	
 	if (i2cReadStatus != kWarpStatusOK)
