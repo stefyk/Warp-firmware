@@ -302,7 +302,7 @@ printSensorDataCCS811(bool hexModeFlag)
        			//			aboveThreshold = false;  
      			//			}
 			
-			SEGGER_RTT_printf(0, " %d, %d", equivalentCO2, RR, seconds);
+			SEGGER_RTT_printf(0, " %d, %d, %d", equivalentCO2, RR, seconds);
 		}
 	}
 }
