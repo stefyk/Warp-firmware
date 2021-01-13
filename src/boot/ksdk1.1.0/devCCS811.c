@@ -288,7 +288,6 @@ printSensorDataCCS811(bool hexModeFlag)
 						
   						RR = counter*3;   // Compute bpm
    						counter = 0;
-   						Ready = 1;
    						offset = seconds;  // Reset Counter
    					}
 				 
