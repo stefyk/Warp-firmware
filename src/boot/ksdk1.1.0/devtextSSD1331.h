@@ -1,8 +1,4 @@
  
-#ifndef __ssd1331_H__
-#define __ssd1331_H__
- 
-#include "mbed.h"
  
 // Screen Settings
 #define width   96-1        // Max X axial direction in screen
