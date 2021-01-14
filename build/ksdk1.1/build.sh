@@ -14,6 +14,8 @@
 	
 	cp ../../src/boot/ksdk1.1.0/devSSD1331.c                         work/demos/Warp/src/
 	cp ../../src/boot/ksdk1.1.0/devSSD1331.h  	                work/demos/Warp/src/
+	
+	cp ../../src/boot/ksdk1.1.0/devtextSSD1331.c  	                work/demos/Warp/src/
 	cp ../../src/boot/ksdk1.1.0/devtextSSD1331.h  	                work/demos/Warp/src/
 	
 	cp ../../src/boot/ksdk1.1.0/devBME680.c				work/demos/Warp/src/
