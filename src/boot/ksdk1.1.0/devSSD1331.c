@@ -94,6 +94,44 @@ int writeCommand_buf(uint8_t* commandByteBuf, uint8_t len)
 	return status;
 }
 
+void draw_result2(char* shot, uint8_t len, uint8_t confidence)
+{
+    
+	//Clear Screen & reset cursor
+	reset_cursor(); 
+	writeCommand(kSSD1331CommandCLEAR);
+	writeCommand(0x00);
+	writeCommand(0x00);
+	writeCommand(0x5F);
+	writeCommand(0x3F);
+
+    uint8_t i;
+    uint8_t x_cursor = 0;
+    uint8_t y_cursor = 10; //these cursors are to determine where to place each char.
+    int dig[3];
+    dig[0] = confidence/10 + 48;
+    dig[1] = confidence%10 + 48;
+    dig[2] = '%';
+    
+    //print each char.    
+    for( i=0; i<len; i++) {
+        PutChar(x_cursor, y_cursor, (int)*(shot + i));
+        x_cursor += X_width;
+    } 
+    
+    x_cursor = 0;
+    y_cursor = 45;
+    
+    i = 0;
+    
+    //print condidence level, then percentage sign.
+    for( i=0; i<3; i++) {
+        PutChar(x_cursor, y_cursor, dig[i]);
+        x_cursor += X_width;
+    } 
+
+}
+
 void draw_result(int16_t  RR, int16_t equivalentCO2)
 {
     
@@ -287,7 +325,7 @@ devSSD1331init(void)
 	 SetFontSize(WH); // set tall font
     	foreground(toRGB(0,255,0)); // set text colour
 
-	draw_result("hello\n\n", 7,00);
+	draw_result2("hello\n\n", 7,00);
 	
 	return 0;
 }
