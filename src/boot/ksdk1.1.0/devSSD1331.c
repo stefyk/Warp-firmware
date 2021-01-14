@@ -211,7 +211,8 @@ devSSD1331init(void)
 	//writeCommand(0x00);
 	//writeCommand(0x5F);
 	//writeCommand(0x3F);
-
+	
+	writeCommand(kSSD1331CommandCLEAR);
 	writeCommand(0x00);
 	writeCommand(0x00);
 	writeCommand(0x5F);
@@ -225,7 +226,7 @@ devSSD1331init(void)
 	writeCommand(14);  
    
    //Green screen for debugging purposes
- /*  
+ 
    writeCommand(kSSD1331CommandDRAWRECT);
 	writeCommand(0x00);
 	writeCommand(0x00);
@@ -239,7 +240,7 @@ devSSD1331init(void)
 	writeCommand(0x00);
 
 
-*/ 	SetFontSize(NORMAL); // set text to normal
+	SetFontSize(NORMAL); // set text to normal
         foreground(toRGB(0,255,0));
 	//background(toRGB(0,0,0));
 	
