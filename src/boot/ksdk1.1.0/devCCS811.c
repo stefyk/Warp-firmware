@@ -303,7 +303,7 @@ printSensorDataCCS811(bool hexModeFlag)
      			//			}
 			
 			SEGGER_RTT_printf(0, " %d, %d, %d", equivalentCO2, RR, seconds);
-			draw_result(RR, equivalentCO2);
+			//draw_result(RR, equivalentCO2);
 		}
 	}
 }
