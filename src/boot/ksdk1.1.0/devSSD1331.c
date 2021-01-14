@@ -93,30 +93,30 @@ void draw_result(int16_t  RR, int16_t equivalentCO2)
         x_cursor += X_width;
     } 
 
-	int num[7];
-		num[0] = 'C';
-		num[1] = 'O';
-		num[2] = '2';
-		num[3] = ':'
+	int let[7];
+		let[0] = 'C';
+		let[1] = 'O';
+		let[2] = '2';
+		let[3] = ':';
 		
 		equivalentCO2 = equivalentCO2 / 10;
 		if (equivalentCO2 != 0) {
-			num [4] = equivalentCO2%10 +48;
+			let [4] = equivalentCO2%10 +48;
 		} else 
 			{
-			num [4] = ' ';
+			let [4] = ' ';
 			}
-		num[4] = equivalentCO2/1000 +48;
+		let[4] = equivalentCO2/1000 +48;
 		equivalentCO2 = equivalentCO2/10;
-		num[5] = equivalentCO2%10 +48;
+		let[5] = equivalentCO2%10 +48;
 		equivalentCO2 = equivalentCO2 / 10;
-		num[6] = equivalentCO2%10 +48;
-		num[7] = equivalentCO2%10 +48;
+		let[6] = equivalentCO2%10 +48;
+		let[7] = equivalentCO2%10 +48;
 		
 		for( i=0; i<7; i++) 
 	
 	{
-        PutChar(x_cursor, y_cursor, num[i]);
+        PutChar(x_cursor, y_cursor, let[i]);
         x_cursor += X_width;
     } 
 			
@@ -214,7 +214,6 @@ devSSD1331init(void)
     SetFontSize(WH); // set tall font
     foreground(toRGB(0,255,0)); // set text colour
 
-	draw_result("hello\n\n", 7,00);
 
 	return 0;
 }
