@@ -3,7 +3,7 @@
 #include "fsl_spi_master_driver.h"
 #include "fsl_port_hal.h"
 
-#include "mbed_ssd1331.h"
+#include "devtextSSD1331.h"
 
 #include "SEGGER_RTT.h"
 #include "gpio_pins.h"
