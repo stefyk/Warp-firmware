@@ -99,13 +99,15 @@ void draw_result(int16_t  RR, int16_t equivalentCO2)
     
 	//Clear Screen & reset cursor
 	reset_cursor(); 
+	writeCommand(kSSD1331CommandCLEAR);
 	writeCommand(0x00);
 	writeCommand(0x00);
 	writeCommand(0x5F);
 	writeCommand(0x3F);
 
-	SetFontSize(NORMAL); // set text to normal
-        foreground(toRGB(0,255,0));
+	SetFontSize(WH); // set tall font
+   	foreground(toRGB(0,255,0)); // set text colour
+	background(toRGB(255,0,255));
 	
 	
     uint16_t i;
