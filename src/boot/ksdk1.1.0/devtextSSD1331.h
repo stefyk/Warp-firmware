@@ -1,6 +1,5 @@
  
- 
-//this file was taken from os.mbed.com (and adapted), full link: https://os.mbed.com/users/star297/code/ssd1331/file/4385fd242db0/ssd1331.h/
+//File from Source: https://os.mbed.com/users/star297/code/ssd1331/file/4385fd242db0/ssd1331.h/
 
 
 #pragma once
