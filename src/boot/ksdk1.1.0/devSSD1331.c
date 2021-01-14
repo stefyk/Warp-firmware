@@ -157,7 +157,7 @@ devSSD1331init(void)
 	writeCommand(14);   
    
    //Green screen for debugging purposes
-   
+ /*  
    writeCommand(kSSD1331CommandDRAWRECT);
 	writeCommand(0x00);
 	writeCommand(0x00);
@@ -170,11 +170,11 @@ devSSD1331init(void)
 	writeCommand(0xFF);
 	writeCommand(0x00);
 
-
+*/
 	return 0;
 }
 
-/*void draw_result(int16_t  RR, int16_t equivalentCO2)
+void draw_result(int16_t  RR, int16_t equivalentCO2)
 {
     
 	//Clear Screen & reset cursor
@@ -231,4 +231,4 @@ devSSD1331init(void)
         x_cursor += X_width;
     } 
 			
-} */
+} 
