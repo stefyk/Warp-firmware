@@ -9,6 +9,7 @@
 #include "gpio_pins.h"
 #include "warp.h"
 #include "devSSD1331.h"
+#include "devtextSSD1331.h"
 
 volatile uint8_t	inBuffer[1];
 volatile uint8_t	payloadBytes[1];
