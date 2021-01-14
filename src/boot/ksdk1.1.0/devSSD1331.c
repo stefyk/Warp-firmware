@@ -171,9 +171,9 @@ devSSD1331init(void)
 	writeCommand(0x00);
 
 
-*/ 	oled.SetFontSize(NORMAL); // set text to normal
-        oled.foreground(oled.toRGB(255,255,255));
-	oled.background(oled.toRGB(0,0,0));
+*/ 	SetFontSize(NORMAL); // set text to normal
+        foreground(toRGB(255,255,255));
+	background(toRGB(0,0,0));
 	
 	//	SetFontSize(WH); // set tall font
    	// 	foreground(toRGB(0,255,0)); // set text colour
