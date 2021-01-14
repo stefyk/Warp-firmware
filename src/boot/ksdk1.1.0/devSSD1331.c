@@ -63,65 +63,6 @@ writeCommand(uint8_t commandByte)
 }
 
 
-void draw_result(int16_t  RR, int16_t equivalentCO2)
-{
-    
-	//Clear Screen & reset cursor
-	reset_cursor(); 
-	writeCommand(kSSD1331CommandCLEAR);
-	writeCommand(0x00);
-	writeCommand(0x00);
-	writeCommand(0x5F);
-	writeCommand(0x3F);
-
-    uint16_t i;
-    uint16_t x_cursor = 0;
-    uint16_t y_cursor = 10; //these cursors are to determine where to place each char.
-   
-	int num[4];
-    num[0] = 'R';
-	num[1] = 'R';
-    num[2] = RR/10 + 48;
-    num[3] = RR%10 + 48;
-
-    //print RR result
-	
-    for( i=0; i<4; i++) 
-	
-	{
-        PutChar(x_cursor, y_cursor, num[i]);
-        x_cursor += X_width;
-    } 
-
-	int let[7];
-		let[0] = 'C';
-		let[1] = 'O';
-		let[2] = '2';
-		let[3] = ':';
-		
-		equivalentCO2 = equivalentCO2 / 10;
-		if (equivalentCO2 != 0) {
-			let [4] = equivalentCO2%10 +48;
-		} else 
-			{
-			let [4] = ' ';
-			}
-		let[4] = equivalentCO2/1000 +48;
-		equivalentCO2 = equivalentCO2/10;
-		let[5] = equivalentCO2%10 +48;
-		equivalentCO2 = equivalentCO2 / 10;
-		let[6] = equivalentCO2%10 +48;
-		let[7] = equivalentCO2%10 +48;
-		
-		for( i=0; i<7; i++) 
-	
-	{
-        PutChar(x_cursor, y_cursor, let[i]);
-        x_cursor += X_width;
-    } 
-			
-}
-
 int
 devSSD1331init(void)
 {
@@ -201,19 +142,93 @@ devSSD1331init(void)
 	 */
 	writeCommand(kSSD1331CommandFILL);
 	writeCommand(0x01);
-
+	
+	
 	/*
 	 *	Clear Screen
 	 */
+	//writeCommand(kSSD1331CommandCLEAR);
+	//writeCommand(0x00);
+	//writeCommand(0x00);
+	//writeCommand(0x5F);
+	//writeCommand(0x3F);
+
+   // SetFontSize(WH); // set tall font
+   //foreground(toRGB(0,255,0)); // set text colour
+   
+   //Green screen for debugging purposes
+   
+   //writeCommand(kSSD1331CommandDRAWRECT);
+	//writeCommand(0x00);
+	//writeCommand(0x00);
+	//writeCommand(0xFF);
+	//writeCommand(0x3F);
+	//writeCommand(0x00);
+	//writeCommand(0xFF);
+	//writeCommand(0x00);
+	//writeCommand(0x00);
+	//writeCommand(0xFF);
+	//writeCommand(0x00);
+
+
+	return 0;
+}
+
+void draw_result(int16_t  RR, int16_t equivalentCO2)
+{
+    
+	//Clear Screen & reset cursor
+	reset_cursor(); 
 	writeCommand(kSSD1331CommandCLEAR);
 	writeCommand(0x00);
 	writeCommand(0x00);
 	writeCommand(0x5F);
 	writeCommand(0x3F);
 
-   // SetFontSize(WH); // set tall font
-   //foreground(toRGB(0,255,0)); // set text colour
+    uint16_t i;
+    uint16_t x_cursor = 0;
+    uint16_t y_cursor = 10; //these cursors are to determine where to place each char.
+   
+	int num[4];
+    num[0] = 'R';
+	num[1] = 'R';
+    num[2] = RR/10 + 48;
+    num[3] = RR%10 + 48;
 
+    //print RR result
+	
+    for( i=0; i<4; i++) 
+	
+	{
+        PutChar(x_cursor, y_cursor, num[i]);
+        x_cursor += X_width;
+    } 
 
-	return 0;
+	int let[7];
+		let[0] = 'C';
+		let[1] = 'O';
+		let[2] = '2';
+		let[3] = ':';
+		
+		equivalentCO2 = equivalentCO2 / 10;
+		if (equivalentCO2 != 0) {
+			let [4] = equivalentCO2%10 +48;
+		} else 
+			{
+			let [4] = ' ';
+			}
+		let[4] = equivalentCO2/1000 +48;
+		equivalentCO2 = equivalentCO2/10;
+		let[5] = equivalentCO2%10 +48;
+		equivalentCO2 = equivalentCO2 / 10;
+		let[6] = equivalentCO2%10 +48;
+		let[7] = equivalentCO2%10 +48;
+		
+		for( i=0; i<7; i++) 
+	
+	{
+        PutChar(x_cursor, y_cursor, let[i]);
+        x_cursor += X_width;
+    } 
+			
 }
