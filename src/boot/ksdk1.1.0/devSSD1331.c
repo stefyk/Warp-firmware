@@ -141,7 +141,7 @@ devSSD1331init(void)
 	 *	To use fill commands, you will have to issue a command to the display to enable them. See the manual.
 	 */
 	writeCommand(kSSD1331CommandFILL);
-	writeCommand(0x01);
+	writeCommand(0x02);
 	
 	
 	/*
