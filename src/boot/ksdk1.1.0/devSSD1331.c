@@ -211,8 +211,8 @@ devSSD1331init(void)
 	writeCommand(0x5F);
 	writeCommand(0x3F);
 
-    SetFontSize(WH); // set tall font
-    foreground(toRGB(0,255,0)); // set text colour
+   // SetFontSize(WH); // set tall font
+   //foreground(toRGB(0,255,0)); // set text colour
 
 
 	return 0;
