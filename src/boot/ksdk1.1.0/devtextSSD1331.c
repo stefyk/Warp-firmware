@@ -1,6 +1,6 @@
 //this file was taken from os.mbed.com (and adapted), full link: https://os.mbed.com/users/star297/code/ssd1331/file/4385fd242db0/ssd1331.cpp/
 
-#include "mbed_ssd1331.h"
+#include "devtextSSD1331.h"
 #include "devSSD1331.h"
 #include <stdint.h>
 #include "SEGGER_RTT.h"
