@@ -110,9 +110,9 @@ void draw_result(int16_t  RR, int16_t equivalentCO2)
 	background(toRGB(255,0,255));
 	
 	
-    uint16_t i;
-    uint16_t x_cursor = 0;
-    uint16_t y_cursor = 10; //these cursors are to determine where to place each char.
+    uint8_t i;
+    uint8_t x_cursor = 0;
+    uint8_t y_cursor = 0; //these cursors are to determine where to place each char.
    
 	int num[4];
     	num[0] = 'R';
