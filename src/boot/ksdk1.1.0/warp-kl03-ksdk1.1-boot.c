@@ -29,6 +29,7 @@
 //#	include "devBMX055.h"
 #	include "devMMA8451Q.h"
 #	include "devSSD1331.h"
+#	include "devtextSSD1331.h"
 //#	include "devHDC1000.h"
 //#	include "devMAG3110.h"
 //#	include "devL3GD20H.h"
