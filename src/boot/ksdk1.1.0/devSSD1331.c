@@ -62,6 +62,38 @@ writeCommand(uint8_t commandByte)
 	return status;
 }
 
+int writeCommand_buf(uint8_t* commandByteBuf, uint8_t len)
+{
+	spi_status_t status;
+
+	/*
+	 *	Drive /CS low.
+	 *
+	 *	Make sure there is a high-to-low transition by first driving high, delay, then drive low.
+	 */
+	GPIO_DRV_SetPinOutput(kSSD1331PinCSn);
+	GPIO_DRV_ClearPinOutput(kSSD1331PinCSn);
+
+	/*
+	 *	Drive DC low (command).
+	 */
+	GPIO_DRV_ClearPinOutput(kSSD1331PinDC);
+
+	status = SPI_DRV_MasterTransferBlocking(0	                                        /* master instance */,
+					                        NULL		                                /* spi_master_user_config_t */,
+					                        (const uint8_t * restrict)commandByteBuf,
+					                        (uint8_t * restrict)&inBuffer[0],
+					                        len		                                    /* transfer size */,
+					                        1000		                                /* timeout in microseconds (unlike I2C which is ms) */
+					                        );
+	/*
+	 *	Drive /CS high
+	 */
+	GPIO_DRV_SetPinOutput(kSSD1331PinCSn);
+
+	return status;
+}
+
 void draw_result(int16_t  RR, int16_t equivalentCO2)
 {
     
@@ -78,7 +110,7 @@ void draw_result(int16_t  RR, int16_t equivalentCO2)
     uint16_t y_cursor = 10; //these cursors are to determine where to place each char.
    
 	int num[4];
-    num[0] = 'R';
+    	num[0] = 'R';
 	num[1] = 'R';
     num[2] = RR/10 + 48;
     num[3] = RR%10 + 48;
@@ -117,7 +149,7 @@ void draw_result(int16_t  RR, int16_t equivalentCO2)
 	{
         PutChar(x_cursor, y_cursor, let[i]);
         x_cursor += X_width;
-    } 
+	} 
 			
 } 
 
