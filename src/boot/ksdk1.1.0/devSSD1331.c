@@ -212,7 +212,6 @@ devSSD1331init(void)
 	//writeCommand(0x5F);
 	//writeCommand(0x3F);
 
-	writeCommand(kSSD1331CommandCLEAR);
 	writeCommand(0x00);
 	writeCommand(0x00);
 	writeCommand(0x5F);
