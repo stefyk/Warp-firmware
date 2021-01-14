@@ -249,8 +249,8 @@ devSSD1331init(void)
 	writeCommand(kSSD1331CommandCLEAR);
 	writeCommand(0x00);
 	writeCommand(0x00);
-	writeCommand(0x5F);
-	writeCommand(0x3F);
+//	writeCommand(0x5F);
+//	writeCommand(0x3F);
 
 extern uint8_t first_char_flag;
 
