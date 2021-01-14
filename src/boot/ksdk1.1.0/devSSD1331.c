@@ -63,6 +63,64 @@ writeCommand(uint8_t commandByte)
 }
 
 
+void draw_result(int16_t  RR, int16_t equivalentCO2)
+{
+    
+	//Clear Screen & reset cursor
+	reset_cursor(); 
+	writeCommand(kSSD1331CommandCLEAR);
+	writeCommand(0x00);
+	writeCommand(0x00);
+	writeCommand(0x5F);
+	writeCommand(0x3F);
+
+    uint16_t i;
+    uint16_t x_cursor = 0;
+    uint16_t y_cursor = 10; //these cursors are to determine where to place each char.
+   
+	int num[4];
+    num[0] = 'R';
+	num[1] = 'R';
+    num[2] = RR/10 + 48;
+    num[3] = RR%10 + 48;
+
+    //print RR result
+	
+    for( i=0; i<4; i++) 
+	
+	{
+        PutChar(x_cursor, y_cursor, num[i]);
+        x_cursor += X_width;
+    } 
+
+	int num[7];
+		num[0] = 'C';
+		num[1] = 'O';
+		num[2] = '2';
+		num[3] = ':'
+		
+		equivalentCO2 = equivalentCO2 / 10;
+		if (equivalentCO2 != 0) {
+			num [4] = equivalentCO2%10 +48;
+		} else 
+			{
+			num [4] = ' ';
+			}
+		num[4] = equivalentCO2/1000 +48;
+		equivalentCO2 = equivalentCO2/10;
+		num[5] = equivalentCO2%10 +48;
+		equivalentCO2 = equivalentCO2 / 10;
+		num[6] = equivalentCO2%10 +48;
+		num[7] = equivalentCO2%10 +48;
+		
+		for( i=0; i<7; i++) 
+	
+	{
+        PutChar(x_cursor, y_cursor, num[i]);
+        x_cursor += X_width;
+    } 
+			
+}
 
 int
 devSSD1331init(void)
