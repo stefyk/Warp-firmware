@@ -127,7 +127,7 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
     i = 0;
     
     //print condidence level, then percentage sign.
-    for( i=0; i<5; i++) 
+    for( i=0; i<4; i++) 
     {
         PutChar(x_cursor, y_cursor, num[i]);
         x_cursor += X_width;
@@ -157,7 +157,7 @@ x_cursor = 0;
 y_cursor = 90;
 	
 	
-for( i=0; i<8; i++) 
+for( i=0; i<7; i++) 
 	
 	{
         PutChar(x_cursor, y_cursor, let[i]);
