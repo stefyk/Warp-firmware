@@ -119,7 +119,7 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
 	num[1] = 'R';
 	num[2] = ' ';
    	num[3] = RR/10 + 48;
-    	num[4] = RR%10;
+    	num[4] = RR%10 + 48;
     
     x_cursor = 0;
     y_cursor = 45;
@@ -153,17 +153,9 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
 		num [6] = equivalentCO2%10 +48;
 		equivalentCO2 = equivalentCO2*10;
 		num [7] = equivalentCO2%10 +48;
-
-		
-
-		
-
-		
-		
-		
-x_cursor = 0;
-y_cursor = 100;
 	
+x_cursor = 0;
+y_cursor = 45;
 	
 for( i=0; i<7; i++) 
 	
@@ -282,7 +274,7 @@ int devSSD1331init(void)
     SetFontSize(NORMAL); // set tall font
     foreground(toRGB(0,255,0)); // set text colour
 
-	draw_result("hello\n\n", 20, 1500);
+	draw_result("Breath detected!\n\n", 14, 1543);
 	
 	return 0;
 }
