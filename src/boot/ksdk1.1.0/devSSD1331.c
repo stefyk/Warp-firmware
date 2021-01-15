@@ -96,9 +96,7 @@ int writeCommand_buf(uint8_t* commandByteBuf, uint8_t len)
 	return status;
 }
 
-
-
-//This function takes in the shot name and the length of the name, as well as the confidence of the prediction and prints them onto the OLED screen.
+//This function prints the result of the breath detection as well as prints the estimated RR and the eCO2 level on the OLED display
 void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
 {
     
@@ -110,10 +108,13 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
 	writeCommand(0x5F);
 	writeCommand(0x3F);
 
+//determining where on the screen to start printing the RR result, x,y,coordinates
+	
     uint8_t i;
     uint8_t x_cursor = 0;
-    uint8_t y_cursor = 10; //these cursors are to determine where to place each char.
+    uint8_t y_cursor = 10; 
 	
+	//defining each character including the letters and the resulting numbers from the RR result
     int num[6];
     	num[0] = 'R';
 	num[1] = 'R';
@@ -130,17 +131,19 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
     
     i = 0;
     
-    //print condidence level, then percentage sign.
+    //for loop for printing the result e.g. RR 16
     for( i=0; i<6; i++) 
     {
         PutChar(x_cursor, y_cursor, num[i]);
         x_cursor += X_width;
     } 
 	
-
+//moving the cursors
+	
 x_cursor = 10;
 y_cursor = 50;
 	
+	//defining each character from the eCO2 result
 	int let[10];
 	
 	let [9] = '\n';
@@ -165,7 +168,7 @@ y_cursor = 50;
 		let[3] = ':';
 	
 
-	
+//printing the eCO2 result
 for( i=0; i<10; i++) 
 	
 	{
@@ -173,7 +176,7 @@ for( i=0; i<10; i++)
         x_cursor += X_width;
 	} 
 	
-	
+//printing letters for "Breath detected"
 	for( i=0; i<16; i++) {
         PutChar(x_cursor, y_cursor, (int)*(breath + i));
         x_cursor += X_width;
