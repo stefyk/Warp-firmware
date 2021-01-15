@@ -273,7 +273,7 @@ int devSSD1331init(void)
     SetFontSize(WH); // set tall font
     foreground(toRGB(0,255,0)); // set text colour
 
-	draw_result("hello\n\n", 00, 500);
+	draw_result("hello\n\n", 15, 500);
 	
 	return 0;
 }
