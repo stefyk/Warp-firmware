@@ -97,7 +97,7 @@ int writeCommand_buf(uint8_t* commandByteBuf, uint8_t len)
 }
 
 //This function prints the result of the breath detection as well as prints the estimated RR and the eCO2 level on the OLED display
-void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
+void draw_result(bool breath, int16_t RR, int16_t equivalentCO2)
 {
     
 	//Clear Screen & reset cursor
@@ -113,6 +113,7 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
     uint8_t i;
     uint8_t x_cursor = 0;
     uint8_t y_cursor = 10; 
+	char* message;
 	
 	//defining each character including the letters and the resulting numbers from the RR result
     int num[6];
@@ -120,16 +121,14 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
 	num[1] = 'R';
 	num[2] = ' ';
    	//num[3] = RR/10 + 48;
-    	num[4] = RR%10 + 48;
+	num[4] = RR%10 + 48;
 	RR = RR / 10;
 	if (RR != 0) {
     	num [3] = RR%10 +48;
-		} else {
-    		num [3] = ' ';
-		}
+	} else {
+		num [3] = ' ';
+	}
 	num[5] = ' ';
-    
-    i = 0;
     
     //for loop for printing the result e.g. RR 16
     for( i=0; i<6; i++) 
@@ -138,49 +137,58 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
         x_cursor += X_width;
     } 
 	
-//moving the cursors
-	
-x_cursor = 10;
-y_cursor = 50;
+	//moving the cursors	
+	x_cursor = 0;
+	y_cursor = 50;
 	
 	//defining each character from the eCO2 result
 	int let[10];
 	
-	let [9] = '\n';
-	let [8] = '\n';
-	let [7] = equivalentCO2%10 +48;
+	let[0] = 'C';
+	let[1] = 'O';
+	let[2] = '2';
+	let[3] = ':';
+	let[7] = equivalentCO2%10 +48;
 	equivalentCO2 = equivalentCO2 / 10;
-	let [6] = equivalentCO2%10 +48;
+	let[6] = equivalentCO2%10 +48;
 
 	equivalentCO2 = equivalentCO2 / 10;
-	let [5] = equivalentCO2%10 +48;
+	let[5] = equivalentCO2%10 +48;
 
 	equivalentCO2 = equivalentCO2 / 10;
 	if (equivalentCO2 != 0) {
-    	let [4] = equivalentCO2%10 +48;
-		} else {
-    		let [4] = ' ';
-		}
+    	let[4] = equivalentCO2%10 +48;
+	} else {
+		let[4] = ' ';
+	}
+	let[8] = '\n';
+	let[9] = '\n';
 	
-		let[0] = 'C';
-		let[1] = 'O';
-		let[2] = '2';
-		let[3] = ':';
-	
-
-//printing the eCO2 result
-for( i=0; i<10; i++) 
-	
+	//printing the eCO2 result
+	for( i=0; i<10; i++) 
 	{
-        PutChar(x_cursor, y_cursor, let[i]);
-        x_cursor += X_width;
+		PutChar(x_cursor, y_cursor, let[i]);
+		x_cursor += X_width;
 	} 
 	
-//printing letters for "Breath detected"
-	for( i=0; i<16; i++) {
-        PutChar(x_cursor, y_cursor, (int)*(breath + i));
-        x_cursor += X_width;
-    }
+	if (breath) {
+		//printing letters for "Breath detected"
+		message = "Breath detected";
+		for( i=0; i<15; i++) {
+			PutChar(x_cursor, y_cursor, (int)*(message + i));
+			x_cursor += X_width;
+		}		
+		
+	} else {
+		//printing letters for "No breath"
+		message = "No breath";
+		for( i=0; i<9; i++) {
+			PutChar(x_cursor, y_cursor, (int)*(message + i));
+			x_cursor += X_width;
+		}
+	}
+	
+
 }
 
 
@@ -286,11 +294,10 @@ int devSSD1331init(void)
     
     
     
-    //Use the mbed library to write the text "hello" at the end of initialisation
-    SetFontSize(NORMAL); // set tall font
+    //Use the devtextSSD1331 library to set the font and the colour of the text
+    SetFontSize(NORMAL); // set normal font
     foreground(toRGB(50,255,100)); // set text colour
 
-	draw_result("Breath detected!\n\n", 12, 1543);
 	
 	return 0;
 }
