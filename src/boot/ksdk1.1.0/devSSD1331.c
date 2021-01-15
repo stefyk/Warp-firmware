@@ -114,17 +114,18 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
     uint8_t x_cursor = 0;
     uint8_t y_cursor = 10; //these cursors are to determine where to place each char.
 	
-    int num[5];
+    int num[6];
     	num[0] = 'R';
 	num[1] = 'R';
 	num[2] = ' ';
    	num[3] = RR/10 + 48;
     	num[4] = RR%10 + 48;
+	num[5] = ' ';
     
     i = 0;
     
     //print condidence level, then percentage sign.
-    for( i=0; i<5; i++) 
+    for( i=0; i<6; i++) 
     {
         PutChar(x_cursor, y_cursor, num[i]);
         x_cursor += X_width;
@@ -134,24 +135,28 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
 x_cursor = 10;
 y_cursor = 50;
 	
-	int let[8];
+	int let[10];
+	
+	let [9] = '\n'
+	let [8] = '\n'
+	let [7] = equivalentCO2%10 +48;
+	equivalentCO2 = equivalentCO2 / 10;
+	let [6] = equivalentCO2%10 +48;
+
+	equivalentCO2 = equivalentCO2 / 10;
+	let [5] = equivalentCO2%10 +48;
+
+	equivalentCO2 = equivalentCO2 / 10;
+	if (equivalentCO2 != 0) {
+    	let [4] = equivalentCO2%10 +48;
+		} else {
+    		let [4] = ' ';
+		}
 	
 		let[0] = 'C';
 		let[1] = 'O';
 		let[2] = '2';
 		let[3] = ':';
-		equivalentCO2 = equivalentCO2 / 1000;
-		if (equivalentCO2 != 0) {
-   	 	num [4] = equivalentCO2%10 +48;
-		} else {
-   		 let [4] = ' ';
-			}
-		equivalentCO2 = equivalentCO2*10;
-		let [5] = equivalentCO2%10 +48;
-		equivalentCO2 = equivalentCO2*10;
-		let [6] = equivalentCO2%10 +48;
-		equivalentCO2 = equivalentCO2*10;
-		let [7] = equivalentCO2%10 +48;
 	
 
 	
@@ -162,7 +167,11 @@ for( i=0; i<8; i++)
         x_cursor += X_width;
 	} 
 	
-
+	
+	for( i=0; i<16; i++) {
+        PutChar(x_cursor, y_cursor, (int)*(breath + i));
+        x_cursor += X_width;
+    }
 }
 
 
@@ -270,7 +279,7 @@ int devSSD1331init(void)
     
     //Use the mbed library to write the text "hello" at the end of initialisation
     SetFontSize(NORMAL); // set tall font
-    foreground(toRGB(0,255,0)); // set text colour
+    foreground(toRGB(100,255,0)); // set text colour
 
 	draw_result("Breath detected!\n\n", 14, 1543);
 	
