@@ -99,7 +99,7 @@ int writeCommand_buf(uint8_t* commandByteBuf, uint8_t len)
 
 
 //This function takes in the shot name and the length of the name, as well as the confidence of the prediction and prints them onto the OLED screen.
-void draw_result(char* breath, int16_t RR)
+void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
 {
     
 	//Clear Screen & reset cursor
@@ -117,8 +117,9 @@ void draw_result(char* breath, int16_t RR)
     int num[4];
     	num[0] = 'R';
 	num[1] = 'R';
-   	num[2] = RR/10 + 48;
-    	num[3] = RR%10 + 48;
+	num[2] = ' ';
+   	num[3] = RR/10 + 48;
+    	num[4] = RR%10 + 48;
     
     x_cursor = 0;
     y_cursor = 45;
@@ -126,11 +127,42 @@ void draw_result(char* breath, int16_t RR)
     i = 0;
     
     //print condidence level, then percentage sign.
-    for( i=0; i<4; i++) 
+    for( i=0; i<5; i++) 
     {
         PutChar(x_cursor, y_cursor, num[i]);
         x_cursor += X_width;
     } 
+	
+	int let[7];
+		let[0] = 'C';
+		let[1] = 'O';
+		let[2] = '2';
+		let[3] = ':';
+		
+		equivalentCO2 = equivalentCO2 / 10;
+		if (equivalentCO2 != 0) {
+			let [4] = equivalentCO2%10 +48;
+		} else 
+			{
+			let [4] = ' ';
+			}
+		let[4] = equivalentCO2/1000 +48;
+		equivalentCO2 = equivalentCO2/10;
+		let[5] = equivalentCO2%10 +48;
+		equivalentCO2 = equivalentCO2 / 10;
+		let[6] = equivalentCO2%10 +48;
+		let[7] = equivalentCO2%10 +48;
+		
+x_cursor = 0;
+y_cursor = 90;
+	
+	
+for( i=0; i<8; i++) 
+	
+	{
+        PutChar(x_cursor, y_cursor, let[i]);
+        x_cursor += X_width;
+	} 
 	
 
 }
@@ -242,7 +274,7 @@ int devSSD1331init(void)
     SetFontSize(WH); // set tall font
     foreground(toRGB(0,255,0)); // set text colour
 
-	draw_result("hello\n\n", 00);
+	draw_result("hello\n\n", 00, 500);
 	
 	return 0;
 }
