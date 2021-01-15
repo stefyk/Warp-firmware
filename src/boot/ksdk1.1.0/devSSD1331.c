@@ -117,17 +117,13 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
     int num[4];
     	num[0] = 'R';
 	num[1] = 'R';
-	num[2] = ' ';
-   	num[3] = RR/10 + 48;
-    	num[4] = RR%10 + 48;
-    
-    x_cursor = 0;
-    y_cursor = 45;
+   	num[2] = RR/10 + 48;
+    	num[3] = RR%10 + 48;
     
     i = 0;
     
     //print condidence level, then percentage sign.
-    for( i=0; i<4; i++) 
+    for( i=0; i<3; i++) 
     {
         PutChar(x_cursor, y_cursor, num[i]);
         x_cursor += X_width;
@@ -145,14 +141,14 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
 		if (equivalentCO2 != 0) {
    	 	num [4] = equivalentCO2%10 +48;
 		} else {
-   		 num [4] = ' ';
+   		 let [4] = ' ';
 			}
 		equivalentCO2 = equivalentCO2*10;
-		num [5] = equivalentCO2%10 +48;
+		let [5] = equivalentCO2%10 +48;
 		equivalentCO2 = equivalentCO2*10;
-		num [6] = equivalentCO2%10 +48;
+		let [6] = equivalentCO2%10 +48;
 		equivalentCO2 = equivalentCO2*10;
-		num [7] = equivalentCO2%10 +48;
+		let [7] = equivalentCO2%10 +48;
 	
 x_cursor = 0;
 y_cursor = 45;
