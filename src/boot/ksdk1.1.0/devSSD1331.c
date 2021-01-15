@@ -137,8 +137,8 @@ y_cursor = 50;
 	
 	int let[10];
 	
-	let [9] = '\n'
-	let [8] = '\n'
+	let [9] = '\n';
+	let [8] = '\n';
 	let [7] = equivalentCO2%10 +48;
 	equivalentCO2 = equivalentCO2 / 10;
 	let [6] = equivalentCO2%10 +48;
