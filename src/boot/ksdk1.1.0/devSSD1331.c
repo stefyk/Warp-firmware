@@ -141,20 +141,24 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
 		let[1] = 'O';
 		let[2] = '2';
 		let[3] = ':';
-		num [7] = equivalentCO2%10 +48;
-
-		equivalentCO2 = equivalentCO2 / 10;
-		num [6] = equivalentCO2%10 +48;
-
-		equivalentCO2 = equivalentCO2 / 10;
-		num [5] = equivalentCO2%10 +48;
-
 		equivalentCO2 = equivalentCO2 / 10;
 		if (equivalentCO2 != 0) {
    	 	num [4] = equivalentCO2%10 +48;
 		} else {
    		 num [4] = ' ';
 			}
+		equivalentCO2 = equivalentCO2 / 10;
+		num [5] = equivalentCO2%10 +48;
+		equivalentCO2 = equivalentCO2 / 10;
+		num [6] = equivalentCO2%10 +48;
+		num [7] = equivalentCO2%10 +48;
+
+		
+
+		
+
+		
+		
 		
 x_cursor = 0;
 y_cursor = 100;
