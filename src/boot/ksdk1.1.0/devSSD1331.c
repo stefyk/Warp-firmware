@@ -122,7 +122,7 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
     	num[4] = RR%10 + 48;
     
     x_cursor = 0;
-    y_cursor = 30;
+    y_cursor = 45;
     
     i = 0;
     
@@ -153,7 +153,7 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
 		let[7] = equivalentCO2%10 +48;
 		
 x_cursor = 0;
-y_cursor = 50;
+y_cursor = 100;
 	
 	
 for( i=0; i<7; i++) 
