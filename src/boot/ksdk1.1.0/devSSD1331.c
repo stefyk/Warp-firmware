@@ -160,7 +160,7 @@ y_cursor = 50;
 	
 
 	
-for( i=0; i<8; i++) 
+for( i=0; i<10; i++) 
 	
 	{
         PutChar(x_cursor, y_cursor, let[i]);
@@ -279,7 +279,7 @@ int devSSD1331init(void)
     
     //Use the mbed library to write the text "hello" at the end of initialisation
     SetFontSize(NORMAL); // set tall font
-    foreground(toRGB(100,255,0)); // set text colour
+    foreground(toRGB(50,255,100)); // set text colour
 
 	draw_result("Breath detected!\n\n", 14, 1543);
 	
