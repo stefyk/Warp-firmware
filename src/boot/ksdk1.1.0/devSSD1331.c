@@ -114,24 +114,27 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
     uint8_t x_cursor = 0;
     uint8_t y_cursor = 10; //these cursors are to determine where to place each char.
 	
-    int num[4];
+    int num[5];
     	num[0] = 'R';
 	num[1] = 'R';
-   	num[2] = RR/10 + 48;
-    	num[3] = RR%10 + 48;
+	num[2] = ' ';
+   	num[3] = RR/10 + 48;
+    	num[4] = RR%10 + 48;
     
     i = 0;
     
     //print condidence level, then percentage sign.
-    for( i=0; i<3; i++) 
+    for( i=0; i<5; i++) 
     {
         PutChar(x_cursor, y_cursor, num[i]);
         x_cursor += X_width;
     } 
 	
 
+x_cursor = 10;
+y_cursor = 50;
 	
-	int let[7];
+	int let[8];
 	
 		let[0] = 'C';
 		let[1] = 'O';
@@ -150,10 +153,9 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
 		equivalentCO2 = equivalentCO2*10;
 		let [7] = equivalentCO2%10 +48;
 	
-x_cursor = 0;
-y_cursor = 45;
+
 	
-for( i=0; i<7; i++) 
+for( i=0; i<8; i++) 
 	
 	{
         PutChar(x_cursor, y_cursor, let[i]);
