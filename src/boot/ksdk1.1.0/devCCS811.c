@@ -254,23 +254,22 @@ printSensorDataCCS811(bool hexModeFlag)
 		}
 		else
 		{
-			//SEGGER_RTT_printf(0, "Into loop1!");
+			//SEGGER_RTT_printf(0, "Into loop1!"); //used for debugging
 			
 			
-			seconds = RTC->TSR;
-			timepassed = seconds - offset;
+			seconds = RTC->TSR;  //using the time function which keeps track of time on the FRDM-KL03 board
+			timepassed = seconds - offset;   //value used to estimate the time that has passed since the counter has started
+			                                 //to count breaths detected
 			//SEGGER_RTT_printf(0, "%d, %d", timepassed, seconds );
 				
-				if(timepassed >= 0 && timepassed < 20)
+				if(timepassed >= 0 && timepassed < 20)   //checks whether 20 seconds has passed since the counter has started counting
    					{
 						
-						
-						
-						
-   					if(equivalentCO2 > threshold && !aboveThreshold) //detects when the signal has passed the threshold and is on the risign edge
+   					if(equivalentCO2 > threshold && !aboveThreshold) //detects when the signal has passed the threshold and whether the previous value was above the threshold
+											 //this check makes sure that if the CO2 value can't drop fast enough to its initial value, a breath won't be detected more than once
      						{
 								SEGGER_RTT_printf(0, "Breath detected!");
-    							counter++;   // counts up the beats detected
+    							counter++;   // counts up the breaths detected
        							aboveThreshold = true;
       						}
 
@@ -283,18 +282,22 @@ printSensorDataCCS811(bool hexModeFlag)
      
    					}
 					
-   				else //once 10 seconds have passed, it estimates the beats per minute
+   				else //once 20 seconds have passed, it estimates the breaths per minute
   					{
 						
-  						RR = counter*3;   // Compute bpm
-   						counter = 0;
-   						offset = seconds;  // Reset Counter
+  						RR = counter*3;   // Computes the respiratory rate by multiplying by three the value of counter, which has counted for 20 sec
+   						counter = 0;	// Resets Counter
+   						offset = seconds;  //passes the value of the current time to offset so that the timer can start from 0 seconds
    					}
 				 
+			
+			
+			//The following code returns whether a breath has been detected or not
+			
 				
 				//if (equivalentCO2 > threshold && !aboveThreshold)
 				//		{
-				//		aboveThreshold = true;
+				//		aboveThreshold = true;		       //it checks whether a breath has been detected before so that it does not detect the same breath twice
 				//		SEGGER_RTT_printf(0, "Breath detected!");
 				//		}
 				//if(equivalentCO2 < threshold) 
@@ -303,7 +306,7 @@ printSensorDataCCS811(bool hexModeFlag)
      			//			}
 			
 			SEGGER_RTT_printf(0, "CO2 %d, RR %d, TVOC %d", equivalentCO2, RR, TVOC);
-			draw_result(RR, equivalentCO2);
+			draw_result(RR, equivalentCO2); //calls the display function
 		}
 	}
 }
