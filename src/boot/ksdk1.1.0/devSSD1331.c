@@ -287,7 +287,7 @@ int devSSD1331init(void)
     SetFontSize(NORMAL); // set tall font
     foreground(toRGB(50,255,100)); // set text colour
 
-	draw_result("Breath detected!\n\n", 14, 1543);
+	draw_result("Breath detected!\n\n", 12, 1543);
 	
 	return 0;
 }
