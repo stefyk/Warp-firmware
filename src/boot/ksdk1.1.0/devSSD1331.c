@@ -141,16 +141,17 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
 		let[1] = 'O';
 		let[2] = '2';
 		let[3] = ':';
-		equivalentCO2 = equivalentCO2 / 10;
+		equivalentCO2 = equivalentCO2 / 1000;
 		if (equivalentCO2 != 0) {
    	 	num [4] = equivalentCO2%10 +48;
 		} else {
    		 num [4] = ' ';
 			}
-		equivalentCO2 = equivalentCO2 / 10;
+		equivalentCO2 = equivalentCO2*10;
 		num [5] = equivalentCO2%10 +48;
-		equivalentCO2 = equivalentCO2 / 10;
+		equivalentCO2 = equivalentCO2*10;
 		num [6] = equivalentCO2%10 +48;
+		equivalentCO2 = equivalentCO2*10;
 		num [7] = equivalentCO2%10 +48;
 
 		
@@ -278,7 +279,7 @@ int devSSD1331init(void)
     
     
     //Use the mbed library to write the text "hello" at the end of initialisation
-    SetFontSize(WH); // set tall font
+    SetFontSize(NORMAL); // set tall font
     foreground(toRGB(0,255,0)); // set text colour
 
 	draw_result("hello\n\n", 20, 1500);
