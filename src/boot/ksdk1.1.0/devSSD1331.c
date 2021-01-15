@@ -118,8 +118,14 @@ void draw_result(char* breath, int16_t RR, int16_t equivalentCO2)
     	num[0] = 'R';
 	num[1] = 'R';
 	num[2] = ' ';
-   	num[3] = RR/10 + 48;
+   	//num[3] = RR/10 + 48;
     	num[4] = RR%10 + 48;
+	RR = RR / 10;
+	if (RR != 0) {
+    	num [3] = RR%10 +48;
+		} else {
+    		num [3] = ' ';
+		}
 	num[5] = ' ';
     
     i = 0;
