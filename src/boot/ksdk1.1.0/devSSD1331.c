@@ -99,7 +99,7 @@ int writeCommand_buf(uint8_t* commandByteBuf, uint8_t len)
 
 
 //This function takes in the shot name and the length of the name, as well as the confidence of the prediction and prints them onto the OLED screen.
-void draw_result(char* shot, uint8_t len, uint8_t confidence)
+void draw_result(char* breath, int16_t RR)
 {
     
 	//Clear Screen & reset cursor
@@ -113,16 +113,12 @@ void draw_result(char* shot, uint8_t len, uint8_t confidence)
     uint8_t i;
     uint8_t x_cursor = 0;
     uint8_t y_cursor = 10; //these cursors are to determine where to place each char.
-    int dig[3];
-    dig[0] = confidence/10 + 48;
-    dig[1] = confidence%10 + 48;
-    dig[2] = '%';
-    
-    //print each char.    
-    for( i=0; i<len; i++) {
-        PutChar(x_cursor, y_cursor, (int)*(shot + i));
-        x_cursor += X_width;
-    } 
+	
+    int num[4];
+    	num[0] = 'R';
+	num[1] = 'R';
+   	num[2] = RR/10 + 48;
+    	num[3] = RR%10 + 48;
     
     x_cursor = 0;
     y_cursor = 45;
@@ -130,10 +126,12 @@ void draw_result(char* shot, uint8_t len, uint8_t confidence)
     i = 0;
     
     //print condidence level, then percentage sign.
-    for( i=0; i<3; i++) {
-        PutChar(x_cursor, y_cursor, dig[i]);
+    for( i=0; i<4; i++) 
+    {
+        PutChar(x_cursor, y_cursor, num[i]);
         x_cursor += X_width;
     } 
+	
 
 }
 
@@ -244,7 +242,7 @@ int devSSD1331init(void)
     SetFontSize(WH); // set tall font
     foreground(toRGB(0,255,0)); // set text colour
 
-	draw_result("hello\n\n", 7,00);
+	draw_result("hello\n\n", 00);
 	
 	return 0;
 }
