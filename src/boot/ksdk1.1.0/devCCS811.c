@@ -306,7 +306,7 @@ printSensorDataCCS811(bool hexModeFlag)
      			//			}
 			
 			SEGGER_RTT_printf(0, "CO2 %d, RR %d, TVOC %d", equivalentCO2, RR, TVOC);
-			draw_result(RR, equivalentCO2); //calls the display function
+			draw_result(aboveThreshold, RR, equivalentCO2); //calls the display function
 		}
 	}
 }
